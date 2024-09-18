@@ -1,0 +1,82 @@
+{
+    "name": "PlayerControles",
+    "maps": [
+        {
+            "name": "Driving",
+            "id": "4a0d3a99-ec45-4cda-9ebe-4b1e3602f964",
+            "actions": [
+                {
+                    "name": "Gas",
+                    "type": "Value",
+                    "id": "c986de78-3e3a-4808-b5fe-d42a8dc7f2a5",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Break",
+                    "type": "Value",
+                    "id": "693728c4-c65a-415c-b5a2-629374febd25",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c99527b3-963d-467e-acf8-e8c091c985b1",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gas",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d2a2b6c0-8425-4938-b46f-2a8a473e1eb3",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Break",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "MenuNAvigation",
+            "id": "954097e3-cb06-4ccb-af49-85bbb62fa5c5",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "7a7853e9-84f2-427c-9121-1ab7be422f07",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a9d91b98-911c-40f4-bd0e-5bc28acba05a",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
