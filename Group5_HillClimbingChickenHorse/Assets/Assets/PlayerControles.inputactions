@@ -9,16 +9,25 @@
                     "name": "Gas",
                     "type": "Value",
                     "id": "c986de78-3e3a-4808-b5fe-d42a8dc7f2a5",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Double",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Break",
+                    "name": "Cursor",
                     "type": "Value",
                     "id": "693728c4-c65a-415c-b5a2-629374febd25",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Select",
+                    "type": "Value",
+                    "id": "63ae267e-46c2-4237-adf5-25562c341395",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -26,24 +35,57 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "c99527b3-963d-467e-acf8-e8c091c985b1",
+                    "name": "1D Axis",
+                    "id": "77b1ee13-81b7-43e5-b551-ccca17f1c3e3",
+                    "path": "1DAxis(whichSideWins=1)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gas",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "9b3d5fca-7394-4474-90fe-0eb5ce4e1d68",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gas",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "b30bdd71-5876-40c7-9fbe-ab4f91cfbb59",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Gas",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
                     "id": "d2a2b6c0-8425-4938-b46f-2a8a473e1eb3",
-                    "path": "<Gamepad>/leftTrigger",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Break",
+                    "action": "Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7e5f732-0451-4b2c-9e7f-c387d483408b",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
