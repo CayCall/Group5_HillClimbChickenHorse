@@ -8,12 +8,23 @@ public class PlayerInputs : MonoBehaviour
     public Vector2 cursorMoveDirction;
     private void Update()
     {
+        Gas();
     }
 
     public void Gas()
     {
-        var positive = Gamepad.current.rightTrigger.ReadValue();
-        var negative = Gamepad.current.leftTrigger.ReadValue();
+        float positive = 0f;
+        float negative = 0f;
+        if (Gamepad.current.enabled)
+        {
+            positive = Gamepad.current.rightTrigger.ReadValue(); 
+            negative = Gamepad.current.leftTrigger.ReadValue();
+        }
+        else
+        {
+            positive = Keyboard.current.rightArrowKey.ReadValue();
+            negative = Keyboard.current.leftArrowKey.ReadValue();
+        }
 
         var direction = positive - negative;
         Debug.Log("Direction is " + direction);
