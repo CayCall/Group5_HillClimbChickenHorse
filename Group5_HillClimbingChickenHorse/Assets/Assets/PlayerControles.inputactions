@@ -1,0 +1,166 @@
+{
+    "name": "PlayerControles",
+    "maps": [
+        {
+            "name": "Driving",
+            "id": "4a0d3a99-ec45-4cda-9ebe-4b1e3602f964",
+            "actions": [
+                {
+                    "name": "Gas",
+                    "type": "Value",
+                    "id": "c986de78-3e3a-4808-b5fe-d42a8dc7f2a5",
+                    "expectedControlType": "Double",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Cursor",
+                    "type": "Value",
+                    "id": "693728c4-c65a-415c-b5a2-629374febd25",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Select",
+                    "type": "Value",
+                    "id": "63ae267e-46c2-4237-adf5-25562c341395",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Gas Keyboard",
+                    "type": "Button",
+                    "id": "cd845714-5ab1-4ea4-bec4-3bed82356f1b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "77b1ee13-81b7-43e5-b551-ccca17f1c3e3",
+                    "path": "1DAxis(whichSideWins=1)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gas",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "9b3d5fca-7394-4474-90fe-0eb5ce4e1d68",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gas",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "b30bdd71-5876-40c7-9fbe-ab4f91cfbb59",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gas",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "d2a2b6c0-8425-4938-b46f-2a8a473e1eb3",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a7e5f732-0451-4b2c-9e7f-c387d483408b",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "3de116c8-3546-4842-988d-0a91aea13a27",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gas Keyboard",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "a57aac26-84a9-43ee-99f7-4032ee437b0d",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gas Keyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "616ea7d0-2d01-4be0-88c5-f6ac1a0e2355",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gas Keyboard",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "MenuNAvigation",
+            "id": "954097e3-cb06-4ccb-af49-85bbb62fa5c5",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "7a7853e9-84f2-427c-9121-1ab7be422f07",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a9d91b98-911c-40f4-bd0e-5bc28acba05a",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
