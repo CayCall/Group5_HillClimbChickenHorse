@@ -9,6 +9,7 @@ public class PlayerInputs : MonoBehaviour
 {
     public Vector2 cursorMoveDirction;
     public float throttle;
+    public bool useKeyboard;
 
     private void Update()
     {
@@ -28,8 +29,9 @@ public class PlayerInputs : MonoBehaviour
         {
             positive = Gamepad.current.rightTrigger.ReadValue(); 
             negative = Gamepad.current.leftTrigger.ReadValue();
+            Debug.Log("cont connected");
         }
-        if (Keyboard.current != null)  // Fallback to keyboard input
+        if (Keyboard.current != null && useKeyboard)  // Fallback to keyboard input
         {
             positive = Keyboard.current.rightArrowKey.ReadValue();
             negative = Keyboard.current.leftArrowKey.ReadValue();
