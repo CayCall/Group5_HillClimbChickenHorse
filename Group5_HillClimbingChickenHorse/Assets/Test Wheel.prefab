@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 5826340954645187092}
   - component: {fileID: -8786288254851717767}
   - component: {fileID: 8693303493002055051}
+  - component: {fileID: 3649365908666309110}
   m_Layer: 0
-  m_Name: Test Player
+  m_Name: Test Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,7 +137,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorMoveDirction: {x: 0, y: 0}
   throttle: 0
-  inputType: 1
 --- !u!114 &5826340954645187092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,3 +214,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3649365908666309110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7878660729258462967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d720ae217c499fbf63bf0c67777ef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rB2D: {fileID: 0}
+  pI: {fileID: 0}
+  speed: 0
+  maxAcceleration: 0
