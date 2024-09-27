@@ -12,8 +12,6 @@ namespace DefaultNamespace
         private void Update()
         {
             MoveCursor();
-            
-            
         }
 
         public void MoveCursor()
