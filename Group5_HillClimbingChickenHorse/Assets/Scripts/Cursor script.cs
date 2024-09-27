@@ -16,13 +16,16 @@ namespace DefaultNamespace
 
         public void MoveCursor()
         {
-            var newPos = new Vector2((cursorObject.position.x 
-                                      + playerInputs.cursorMoveDirction.x) 
-                                     * moveSpeed, 
-                                    (cursorObject.position.y 
-                                     + playerInputs.cursorMoveDirction.y) 
-                                    * moveSpeed);
-            cursorObject.position = newPos;
+            if (cursorObject != null)
+            {
+                var newPos = new Vector2((cursorObject.position.x 
+                                          + playerInputs.cursorMoveDirction.x) 
+                                         * moveSpeed, 
+                    (cursorObject.position.y 
+                     + playerInputs.cursorMoveDirction.y) 
+                    * moveSpeed);
+                cursorObject.position = newPos;
+            }
         }
     }
 }

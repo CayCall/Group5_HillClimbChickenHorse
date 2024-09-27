@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - CarPart
+  - Ground
   layers:
   - Default
   - TransparentFX
