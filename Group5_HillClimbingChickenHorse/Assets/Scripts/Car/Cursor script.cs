@@ -15,7 +15,7 @@ namespace DefaultNamespace
         private void Update()
         {
             MoveCursor();
-            CheckObjectSelection();
+           // CheckObjectSelection();
         }
 
         public void MoveCursor()
@@ -37,34 +37,6 @@ namespace DefaultNamespace
             }
         }
 
-        public void CheckObjectSelection()
-        {
-            // gonna use 'A or  X' button (or another button)for selecting the object
-            if (cursorObject != null && Input.GetButtonDown("SelectButton")) 
-            {
-                RaycastHit2D hit = Physics2D.Raycast(cursorObject.position, Vector2.zero);
-
-                if (hit.collider != null && hit.collider.CompareTag("Selectable"))
-                {
-                    Debug.Log("hit:" + gameObject.name);
-                    selectedObject = hit.collider.gameObject;
-                    isObjectSelected = true;
-                    selectedObject.GetComponent<Collider2D>().enabled = false;
-                    
-                    FindObjectOfType<GameManager>().ClosePanel();
-                }
-            }
-        }
-
-        public void InstantiateSelectedObject(Vector2 position)
-        {
-            if (selectedObject != null)
-            {
-                Instantiate(selectedObject, position, Quaternion.identity);
-                Destroy(selectedObject);
-                isObjectSelected = false;
-                selectedObject = null;
-            }
-        }
+        
     }
 }

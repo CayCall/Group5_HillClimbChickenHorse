@@ -285,6 +285,10 @@ PrefabInstance:
       propertyPath: wrongWheelMultiplier
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5826340954645187092, guid: 7689f01b843be2549a9c895a96597870, type: 3}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7878660729258462967, guid: 7689f01b843be2549a9c895a96597870, type: 3}
       propertyPath: m_Name
       value: Test Wheel
