@@ -910,10 +910,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8137680184701687663, guid: d9d67d5c2987296488c1ad308137a448, type: 3}
-      propertyPath: cursorObject
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
