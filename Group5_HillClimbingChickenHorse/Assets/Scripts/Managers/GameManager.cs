@@ -7,62 +7,110 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private bool isChosen;
+    [SerializeField] private bool isChosen; 
+    private float countdownInterval = 1f;
     
+    [Header("Selection Phase")]
     public GameObject pnlItems;
-    private float pnlTimer = 5;
-    private float currentpnlTimer;
-    private float countdownInterval = 1f; 
+    private float pnlTimer = 10;
+    private float currentSelectionPhaseTimer;
     private float nextTime;
-    public TextMeshProUGUI timerText;
+    private bool isSelectionPhase;
+    public TextMeshProUGUI timerText; 
+    
+    
+    [Header("Placement Phase")]
+    private bool isPlacementPhase;
+    private float placementTimer = 10;
+    private float currentPlacementTimer;
+    private float nextPlacementTime;
+    public TextMeshProUGUI placementTimerText;
+    //get playerinputs and should beinactive during this phase and only active once this phase is done 
+    
+    [Header("Events")] 
+    public GameEvent onEndSelectionPhase;
+    public GameEvent onEndPlacementPhase;
 
-    [Header("Events")] public GameEvent onEndPlacementPhase;
-    
-    
-    
     void Start()
     {
+        // Initialize selection phase
         if (pnlItems != null)
         {
             pnlItems.SetActive(true);
         }
-
-        currentpnlTimer = pnlTimer;
+        currentSelectionPhaseTimer = pnlTimer;
         nextTime = Time.time + countdownInterval;
         
+        // Initialize placement phase
+        currentPlacementTimer = placementTimer;
+        nextPlacementTime = Time.time + countdownInterval;
+        
+        
+        //to start selection phase
+        isSelectionPhase = true;
     }
-    
+
     void Update()
     {
-        if ( currentpnlTimer > 0 && Time.time >= nextTime)
+        onSelectionTimer();
+        if (isPlacementPhase)
         {
-            currentpnlTimer--; 
-            nextTime = Time.time + countdownInterval; 
-          
+            onPlacementTimer();
         }
-
-        if ( currentpnlTimer <= 0)
-        {
-            currentpnlTimer = 0;
-            ClosePanel();
-        }
-
-
-        UpdateTimerDisplay();
-    }
-    void UpdateTimerDisplay()
-    {
-        timerText.text = "Choose your item before the placement phase: " + currentpnlTimer.ToString(); // Display the timer
     }
 
-    public void ClosePanel()
+    private void onSelectionTimer()
     {
-        if (pnlItems != null)
+        if (currentSelectionPhaseTimer > 0 && Time.time >= nextTime)
         {
-            pnlItems.SetActive(false);
-            isChosen = true;
+            currentSelectionPhaseTimer--;
+            nextTime = Time.time + countdownInterval;
+        }
+
+        if (currentSelectionPhaseTimer <= 0)
+        {
+            isSelectionPhase = false;
+            currentSelectionPhaseTimer = 0;
+            
+            //close the item panel that selects an object
+            if (pnlItems != null)
+            {
+                pnlItems.SetActive(false);
+                isChosen = true;
+            }
+            
+            //this will end my selection phase
+            onEndSelectionPhase.Raise();
+            //after selection phase start placement phase
+            isPlacementPhase = true;
+        }
+
+        timerText.text =
+            "Choose your item before the placement phase: " +
+            currentSelectionPhaseTimer.ToString(); 
+    }
+    
+    
+    // for my placement phase
+    private void onPlacementTimer()
+    {
+        if (currentPlacementTimer > 0 && Time.time >= nextPlacementTime)
+        {
+            currentPlacementTimer--;
+            nextPlacementTime = Time.time + countdownInterval;
+        }
+
+        if (currentPlacementTimer <= 0)
+        {
+            currentPlacementTimer = 0;
+            placementTimerText.enabled = false;
             onEndPlacementPhase.Raise();
-            Debug.Log("Closed Panel");
         }
+
+        placementTimerText.text =
+            "Place your item before the time runs out: " +
+            currentPlacementTimer.ToString(); // Display the placement timer
     }
+    
+    //use camera behaviour to zoom out when in pla
 }
