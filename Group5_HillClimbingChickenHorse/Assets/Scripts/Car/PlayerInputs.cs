@@ -39,7 +39,7 @@ public class PlayerInputs : MonoBehaviour
         }
 
         throttle = positive - negative;
-        Debug.Log("Direction is " + throttle);
+        //Debug.Log("Direction is " + throttle);
     }
 
     // Method to continuously track cursor movement (e.g., left stick on gamepad)
@@ -48,7 +48,7 @@ public class PlayerInputs : MonoBehaviour
         if (Gamepad.current != null && Gamepad.current.enabled)
         {
             cursorMoveDirction = Gamepad.current.leftStick.ReadValue();
-            Debug.Log("Cursor moves in the direction " + cursorMoveDirction);
+           // Debug.Log("Cursor moves in the direction " + cursorMoveDirction);
         }
         // You can add keyboard movement or mouse input logic here if needed.
     }
@@ -62,7 +62,7 @@ public class PlayerInputs : MonoBehaviour
 
             if (select)
             {
-                Debug.Log("Select button was pressed");
+                //Debug.Log("Select button was pressed");
             }
         }
     }
