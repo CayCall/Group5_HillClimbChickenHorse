@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveAction:
-    m_Name: 
+    m_Name: Move
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: c37c5f9f-ea11-47ae-af88-f1b9b8935b21
@@ -318,7 +318,7 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   clickAction:
-    m_Name: 
+    m_Name: Click
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 563f21f4-9d8b-434b-a497-a04396f7d953
@@ -326,8 +326,8 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  cursor: {fileID: 0}
-  cursorSpeed: 1000
+  cursor: {fileID: 4378247323244160724}
+  cursorSpeed: 50
 --- !u!114 &2547876315619489284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
-  player: {fileID: 0}
+  player: {fileID: 3494125042594764989, guid: 52a77d6bd404e12488c9d4a587c93094, type: 3}
 --- !u!114 &8993828578470090017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,7 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectA: {fileID: 4307340447820807861}
   objectB: {fileID: 7616379251680853039}
-  midpointObject: {fileID: 0}
+  midpointObject: {fileID: 3494125042594764989, guid: 52a77d6bd404e12488c9d4a587c93094, type: 3}
 --- !u!1 &8702748148000815662
 GameObject:
   m_ObjectHideFlags: 0
