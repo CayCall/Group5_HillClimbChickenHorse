@@ -25,14 +25,13 @@ public class PlayerInputs : MonoBehaviour
         float positive = 0f;
         float negative = 0f;
 
-        if (Gamepad.current != null && Gamepad.current.enabled) // Ensure gamepad is connected
+        if (Gamepad.current != null && Gamepad.current.enabled)  // Ensure gamepad is connected
         {
-            positive = Gamepad.current.rightTrigger.ReadValue();
+            positive = Gamepad.current.rightTrigger.ReadValue(); 
             negative = Gamepad.current.leftTrigger.ReadValue();
-
+            Debug.Log("cont connected");
         }
-
-        if (Keyboard.current != null && useKeyboard) // Fallback to keyboard input
+        if (Keyboard.current != null && useKeyboard)  // Fallback to keyboard input
         {
             positive = Keyboard.current.rightArrowKey.ReadValue();
             negative = Keyboard.current.leftArrowKey.ReadValue();
@@ -40,6 +39,7 @@ public class PlayerInputs : MonoBehaviour
         }
 
         throttle = positive - negative;
+        //Debug.Log("Direction is " + throttle);
     }
 
     // Method to continuously track cursor movement (e.g., left stick on gamepad)
@@ -48,7 +48,7 @@ public class PlayerInputs : MonoBehaviour
         if (Gamepad.current != null && Gamepad.current.enabled)
         {
             cursorMoveDirction = Gamepad.current.leftStick.ReadValue();
-         
+           // Debug.Log("Cursor moves in the direction " + cursorMoveDirction);
         }
         // You can add keyboard movement or mouse input logic here if needed.
     }
@@ -62,7 +62,7 @@ public class PlayerInputs : MonoBehaviour
 
             if (select)
             {
-                Debug.Log("Select button was pressed");
+                //Debug.Log("Select button was pressed");
             }
         }
     }
