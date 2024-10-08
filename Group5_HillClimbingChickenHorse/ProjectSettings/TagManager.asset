@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CarPart
   - Ground
+  - Selectable
   layers:
   - Default
   - TransparentFX
