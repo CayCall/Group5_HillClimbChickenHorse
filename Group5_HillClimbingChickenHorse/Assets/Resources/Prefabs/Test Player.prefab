@@ -254,7 +254,6 @@ GameObject:
   - component: {fileID: 5265246264115387004}
   - component: {fileID: 657856095637209604}
   - component: {fileID: 2765360998397286048}
-  - component: {fileID: 2547876315619489284}
   - component: {fileID: 8993828578470090017}
   m_Layer: 0
   m_Name: Test Player
@@ -328,20 +327,7 @@ MonoBehaviour:
     m_Flags: 0
   cursor: {fileID: 4378247323244160724}
   cursorSpeed: 50
---- !u!114 &2547876315619489284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5597398484045980256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e940634b9efe3404e906055eb68402ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
-  player: {fileID: 3494125042594764989, guid: 52a77d6bd404e12488c9d4a587c93094, type: 3}
+  UICamera: {fileID: 0}
 --- !u!114 &8993828578470090017
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,14 +13,13 @@ namespace DefaultNamespace
         public float cursorSpeed = 1000f; // Cursor speed multiplier
 
         private Vector2 moveInput; // Store movement input from the controller
-        private Camera mainCamera;
+        [SerializeField]private Camera UICamera;
 
         private void Start()
         {
-            // Get the main camera
-            mainCamera = Camera.main;
+    
 
-            if (mainCamera == null)
+            if (UICamera== null)
             {
                 Debug.LogError("Main Camera not found!");
             }
@@ -40,7 +39,7 @@ namespace DefaultNamespace
 
         void Update()
         {
-            if (mainCamera != null)
+            if (UICamera!= null)
             {
                 // Get the input from the controller stick
                 moveInput = moveAction.ReadValue<Vector2>();
@@ -71,14 +70,15 @@ namespace DefaultNamespace
         {
             // Step 1: Convert the cursor position (UI space) to world position using the main camera
             Vector3 screenPosition = cursor.position;  // Screen space position (UI space)
-    
-            // Ensure Z is set to 0 (or wherever your 2D game objects are located on the Z-plane)
-            Vector3 worldPosition = mainCamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, 0));
+
+            // Step 2: Convert to world position based on the UI camera
+            // Since you're working in 2D, the Z position must match the Z-plane where your objects are located
+            Vector3 worldPosition = UICamera.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, UICamera.nearClipPlane));
 
             // Debug the cursor position in both screen and world space
             Debug.Log($"Cursor screen position: {screenPosition}, Adjusted world position: {worldPosition}");
 
-            // Step 2: Check for UI interactions first
+            // Step 3: Check for UI interactions first
             PointerEventData pointerData = new PointerEventData(EventSystem.current)
             {
                 position = screenPosition // Use screen position for UI interaction
@@ -96,8 +96,8 @@ namespace DefaultNamespace
             }
             else
             {
-                // Step 3: If no UI was hit, check for 2D game object interactions
-                RaycastHit2D hit = Physics2D.Raycast(screenPosition, Vector2.zero);
+                // Step 4: If no UI was hit, check for 2D game object interactions
+                RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
 
                 if (hit.collider != null)
                 {
