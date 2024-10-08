@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2324071278060966558}
   - component: {fileID: 8047258580197305359}
   - component: {fileID: 3853008518451460893}
+  - component: {fileID: 7592105380740198844}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,8 +49,32 @@ MonoBehaviour:
   isChosen: 0
   pnlItems: {fileID: 0}
   timerText: {fileID: 0}
+  _playerInputsArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  _playerInputArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  placementTimerText: {fileID: 0}
+  onEndSelectionPhase: {fileID: 11400000, guid: a91e33f8d1c48f04297db1f14c0d70b6, type: 2}
   onEndPlacementPhase: {fileID: 11400000, guid: b794c6feb6de19f458ece901b06214b5, type: 2}
 --- !u!114 &3853008518451460893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2579352501904387943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8feece511b4b8b047994672b4cfd3493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameEvent: {fileID: 11400000, guid: a91e33f8d1c48f04297db1f14c0d70b6, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7592105380740198844
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,16 +89,4 @@ MonoBehaviour:
   GameEvent: {fileID: 11400000, guid: b794c6feb6de19f458ece901b06214b5, type: 2}
   response:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8047258580197305359}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ClosePanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []

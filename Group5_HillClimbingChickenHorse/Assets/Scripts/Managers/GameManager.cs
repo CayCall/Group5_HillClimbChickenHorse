@@ -4,50 +4,50 @@ using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private bool isChosen; 
+    [SerializeField] private bool isChosen;
     private float countdownInterval = 1f;
-    
-    [Header("Selection Phase")]
-    public GameObject pnlItems;
+
+    [Header("Selection Phase")] public GameObject pnlItems;
     private float pnlTimer = 10;
     private float currentSelectionPhaseTimer;
     private float nextTime;
     private bool isSelectionPhase;
-    public TextMeshProUGUI timerText; 
-    
-    
-    [Header("Placement Phase")]
-    private bool isPlacementPhase;
+    public TextMeshProUGUI timerText;
+    [SerializeField] private PlayerInput[] _playerInputsArray;
+    [SerializeField] private PlayerInputs[] _playerInputArray;
+
+
+    [Header("Placement Phase")] private bool isPlacementPhase;
     private float placementTimer = 10;
     private float currentPlacementTimer;
     private float nextPlacementTime;
+
     public TextMeshProUGUI placementTimerText;
     //get playerinputs and should beinactive during this phase and only active once this phase is done 
-    
-    [Header("Events")] 
-    public GameEvent onEndSelectionPhase;
+
+    [Header("Events")] public GameEvent onEndSelectionPhase;
     public GameEvent onEndPlacementPhase;
 
     void Start()
     {
-        // Initialize selection phase
         if (pnlItems != null)
         {
             pnlItems.SetActive(true);
         }
+
         currentSelectionPhaseTimer = pnlTimer;
         nextTime = Time.time + countdownInterval;
-        
-        // Initialize placement phase
+
         currentPlacementTimer = placementTimer;
         nextPlacementTime = Time.time + countdownInterval;
-        
-        
-        //to start selection phase
+
         isSelectionPhase = true;
+        
+        HandleDeactivateState();
     }
 
     void Update()
@@ -72,25 +72,25 @@ public class GameManager : MonoBehaviour
             isSelectionPhase = false;
             currentSelectionPhaseTimer = 0;
             
-            //close the item panel that selects an object
             if (pnlItems != null)
             {
                 pnlItems.SetActive(false);
                 isChosen = true;
             }
-            
+
             //this will end my selection phase
             onEndSelectionPhase.Raise();
+            
             //after selection phase start placement phase
             isPlacementPhase = true;
         }
 
         timerText.text =
             "Choose your item before the placement phase: " +
-            currentSelectionPhaseTimer.ToString(); 
+            currentSelectionPhaseTimer.ToString();
     }
-    
-    
+
+
     // for my placement phase
     private void onPlacementTimer()
     {
@@ -105,12 +105,37 @@ public class GameManager : MonoBehaviour
             currentPlacementTimer = 0;
             placementTimerText.enabled = false;
             onEndPlacementPhase.Raise();
+            
+            //set player inputs as active
+            handleActiveState();
         }
 
         placementTimerText.text =
             "Place your item before the time runs out: " +
-            currentPlacementTimer.ToString(); // Display the placement timer
+            currentPlacementTimer.ToString(); 
     }
     
-    //use camera behaviour to zoom out when in pla
+    private void HandleDeactivateState()
+    {
+        for (int i = 0; i < _playerInputsArray.Length; i++)
+        {
+            _playerInputsArray[i].enabled = false;
+        }
+        for (int i = 0; i < _playerInputArray.Length; i++)
+        {
+            _playerInputArray[i].enabled = false;
+        }    
+    }
+
+    private void handleActiveState()
+    {
+        for (int i = 0; i < _playerInputsArray.Length; i++)
+        {
+            _playerInputsArray[i].enabled = true;
+        }
+        for (int i = 0; i < _playerInputArray.Length; i++)
+        {
+            _playerInputArray[i].enabled = true;
+        }        
+    }
 }
