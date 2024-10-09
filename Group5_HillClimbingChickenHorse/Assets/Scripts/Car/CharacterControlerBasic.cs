@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace DefaultNamespace
+namespace CC
 {
     public class CharacterControlerBasic : MonoBehaviour
     {

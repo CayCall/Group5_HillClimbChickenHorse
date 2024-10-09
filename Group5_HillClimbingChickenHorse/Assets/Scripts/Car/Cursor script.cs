@@ -1,42 +1,42 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 namespace DefaultNamespace
 {
-   public class Cursor_script : MonoBehaviour
+    public class Cursor_script : MonoBehaviour
     {
-        [SerializeField] private PlayerInputs playerInputs; // Assuming you have a PlayerInputs script handling controller input
-        [SerializeField] public Transform cursorObject;
-        [SerializeField] private float moveSpeed;
-        
-        private GameObject selectedObject;
-        private bool isObjectSelected = false;
+        public InputAction moveAction; // Reference to your move action (e.g., left stick)
+        public RectTransform cursor; // The UI element or object you want to control as a cursor
+        public float cursorSpeed = 1000f; // Cursor speed multiplier
 
-        private void Update()
+        private Vector2 moveInput; // Store movement input from the controller
+
+        private void OnEnable()
         {
-            MoveCursor();
-           // CheckObjectSelection();
+            moveAction.Enable();
         }
 
-        public void MoveCursor()
+        private void OnDisable()
         {
-            if (cursorObject != null)
-            {
-                var newPos = new Vector2((cursorObject.position.x
-                                          + playerInputs.cursorMoveDirction.x)
-                                         * moveSpeed,
-                    (cursorObject.position.y
-                     + playerInputs.cursorMoveDirction.y)
-                    * moveSpeed);
-                cursorObject.position = newPos;
-            }
-            
-            if (isObjectSelected && selectedObject != null)
-            {
-                selectedObject.transform.position = cursorObject.position;
-            }
+            moveAction.Disable();
         }
 
-        
+        void Update()
+        {
+            // Get the input from the controller stick
+            moveInput = moveAction.ReadValue<Vector2>();
+
+            // Calculate the new cursor position
+            Vector2 newCursorPos = cursor.anchoredPosition + (moveInput * cursorSpeed * Time.deltaTime);
+
+            // Clamp the cursor position within the screen bounds
+            newCursorPos.x = Mathf.Clamp(newCursorPos.x, -Screen.width / 2, Screen.width / 2);
+            newCursorPos.y = Mathf.Clamp(newCursorPos.y, -Screen.height / 2, Screen.height / 2);
+
+            // Update the position of the cursor
+            cursor.anchoredPosition = newCursorPos;
+        }
     }
 }
