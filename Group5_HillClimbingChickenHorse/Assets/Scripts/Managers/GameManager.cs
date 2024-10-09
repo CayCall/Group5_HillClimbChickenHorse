@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     private float placementTimer = 10;
     private float currentPlacementTimer;
     private float nextPlacementTime;
+    [SerializeField] private GameObject cursor;
 
     public TextMeshProUGUI placementTimerText;
     //get playerinputs and should beinactive during this phase and only active once this phase is done 
@@ -117,6 +118,7 @@ public class GameManager : MonoBehaviour
     
     private void HandleDeactivateState()
     {
+        cursor.SetActive(false);
         for (int i = 0; i < _playerInputsArray.Length; i++)
         {
             _playerInputsArray[i].enabled = false;
@@ -125,10 +127,12 @@ public class GameManager : MonoBehaviour
         {
             _playerInputArray[i].enabled = false;
         }    
+
     }
 
     private void handleActiveState()
     {
+        cursor.SetActive(true);
         for (int i = 0; i < _playerInputsArray.Length; i++)
         {
             _playerInputsArray[i].enabled = true;
