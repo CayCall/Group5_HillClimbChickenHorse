@@ -41,6 +41,7 @@ public class PlayerInputs : MonoBehaviour
         throttle = positive - negative;
         //Debug.Log("Direction is " + throttle);
     }
+    
 
     // Method to continuously track cursor movement (e.g., left stick on gamepad)
     public void Cursor()
