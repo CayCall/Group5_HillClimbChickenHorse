@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     private float currentPlacementTimer;
     private float nextPlacementTime;
     [SerializeField] private GameObject cursor;
+    [SerializeField] private GameTimer _gameTimer;
+
 
     public TextMeshProUGUI placementTimerText;
     //get playerinputs and should beinactive during this phase and only active once this phase is done 
@@ -105,6 +107,7 @@ public class GameManager : MonoBehaviour
         {
             currentPlacementTimer = 0;
             placementTimerText.enabled = false;
+            _gameTimer.startTimer();
             onEndPlacementPhase.Raise();
             
             //set player inputs as active
