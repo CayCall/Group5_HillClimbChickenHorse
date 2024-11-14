@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using CC;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.InputSystem;
@@ -10,6 +12,8 @@ public class PlayerInputs : MonoBehaviour
     public Vector2 cursorMoveDirction;
     public float throttle;
     public bool useKeyboard;
+    public float positive;
+    public float negative;
 
     private void Update()
     {
@@ -22,8 +26,8 @@ public class PlayerInputs : MonoBehaviour
     // Method to detect gas (acceleration) inputs from both Gamepad and Keyboard
     public void Gas()
     {
-        float positive = 0f;
-        float negative = 0f;
+        positive = 0f;
+        negative = 0f;
 
         if (Gamepad.current != null && Gamepad.current.enabled)  // Ensure gamepad is connected
         {

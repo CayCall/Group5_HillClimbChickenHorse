@@ -137,6 +137,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorMoveDirction: {x: 0, y: 0}
   throttle: 0
+  useKeyboard: 0
+  positive: 0
+  negative: 0
 --- !u!114 &5826340954645187092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,9 +152,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7eda31aa9ad4e78973165357370ce21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInputs: {fileID: 8319742799319786252}
-  cursorObject: {fileID: 0}
-  moveSpeed: 0.9
+  moveAction:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 13d6e2e7-328a-40b6-8c97-32d5ed6e99d7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  cursor: {fileID: 0}
+  cursorSpeed: 1000
 --- !u!58 &-8786288254851717767
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -230,3 +241,8 @@ MonoBehaviour:
   pI: {fileID: 0}
   speed: 0
   maxAcceleration: 0
+  wrongWheelMultiplier: 0
+  rotAcc: 0
+  rotationSpeed: 0
+  centerObject: {fileID: 0}
+  wheelPosition: 0
