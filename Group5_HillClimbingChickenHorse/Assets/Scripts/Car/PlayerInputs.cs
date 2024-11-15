@@ -33,7 +33,7 @@ public class PlayerInputs : MonoBehaviour
         {
             positive = Gamepad.current.rightTrigger.ReadValue(); 
             negative = Gamepad.current.leftTrigger.ReadValue();
-            Debug.Log("cont connected");
+       
         }
         if (Keyboard.current != null && useKeyboard)  // Fallback to keyboard input
         {
@@ -70,5 +70,23 @@ public class PlayerInputs : MonoBehaviour
                 //Debug.Log("Select button was pressed");
             }
         }
+    }
+  
+    public bool NavigateDown()
+    {
+        // Down D-Pad 
+        return Gamepad.current.dpad.down.wasPressedThisFrame;
+    }
+
+    public bool SelectItem()
+    {
+        // Button South press (e.g., A/X)
+        return Gamepad.current.buttonSouth.wasPressedThisFrame;
+    }
+
+    public bool ConfirmPlacement()
+    {
+        // Check if Button South is pressed again for placement
+        return Gamepad.current.buttonSouth.wasPressedThisFrame;
     }
 }

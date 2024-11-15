@@ -1,127 +1,118 @@
-using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
-using Unity.VisualScripting;
 using UnityEngine;
-using TMPro;
 using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private bool isChosen;
-    private float countdownInterval = 1f;
+    [Header("Selection Phase")]
+    public GameObject pnlItems;
+    public GameObject[] items;
+    private int selectedIndex = 0; 
+    private GameObject instantiatedItem; 
+    
+    [Header("Placement Phase")]
+    public Transform uiParent; // Cursor as parent for object to spawn on cursor
 
-    [Header("Selection Phase")] public GameObject pnlItems;
-    private float pnlTimer = 10;
-    private float currentSelectionPhaseTimer;
-    private float nextTime;
-    private bool isSelectionPhase;
-    public TextMeshProUGUI timerText;
+    // Deactivate player input 
     [SerializeField] private PlayerInput[] _playerInputsArray;
     [SerializeField] private PlayerInputs[] _playerInputArray;
 
+    private bool isPlacementLocked = false; // Flag to prevent multiple placements
 
-    [Header("Placement Phase")] private bool isPlacementPhase;
-    private float placementTimer = 10;
-    private float currentPlacementTimer;
-    private float nextPlacementTime;
-    [SerializeField] private GameObject cursor;
-    [SerializeField] private GameTimer _gameTimer;
-
-
-    public TextMeshProUGUI placementTimerText;
-    //get playerinputs and should beinactive during this phase and only active once this phase is done 
-
-    [Header("Events")] public GameEvent onEndSelectionPhase;
-    public GameEvent onEndPlacementPhase;
-
-    void Start()
+    private void Start()
     {
-        if (pnlItems != null)
+        StartSelectionPhase();
+    }
+
+    private void StartSelectionPhase()
+    {
+        pnlItems.SetActive(true); 
+        Debug.Log("Selection Phase Started");
+        HandlePlayerDeactivateState();
+    }
+
+    private void EndSelectionPhase()
+    {
+        pnlItems.SetActive(false); 
+        Debug.Log("Selection Phase Ended");
+        StartPlacementPhase();
+    }
+
+    private void StartPlacementPhase()
+    {
+        Debug.Log("Placement Phase Started");
+        HandlePlayerActiveState();
+        isPlacementLocked = false; // Reset placement lock for the new object
+    }
+
+    private void EndPlacementPhase()
+    {
+        Debug.Log("Placement Phase Ended");
+
+        if (instantiatedItem != null)
         {
-            pnlItems.SetActive(true);
+            // Ensure the item is locked in place
+            instantiatedItem.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static; 
         }
 
-        currentSelectionPhaseTimer = pnlTimer;
-        nextTime = Time.time + countdownInterval;
+        HandlePlayerDeactivateState();
+        // Add logic to transition to the next phase or reset selection
+    }
 
-        currentPlacementTimer = placementTimer;
-        nextPlacementTime = Time.time + countdownInterval;
+    public void HandleInput(PlayerInputs playerInputs)
+    {
+        if (pnlItems.activeSelf)
+        {
+            HandleSelectionInput(playerInputs);
+        }
+        else if (instantiatedItem != null && !isPlacementLocked)
+        {
+            HandlePlacementInput(playerInputs);
+        }
+    }
 
-        isSelectionPhase = true;
+    private void HandleSelectionInput(PlayerInputs playerInputs)
+    {
+        if (playerInputs.NavigateDown())
+        {
+            selectedIndex = (selectedIndex + 1) % items.Length;
+            Debug.Log($"Selected Item Index: {selectedIndex}");
+        }
         
-        HandleDeactivateState();
-    }
-
-    void Update()
-    {
-        onSelectionTimer();
-        if (isPlacementPhase)
+        if (playerInputs.SelectItem())
         {
-            onPlacementTimer();
-        }
-    }
-
-    private void onSelectionTimer()
-    {
-        if (currentSelectionPhaseTimer > 0 && Time.time >= nextTime)
-        {
-            currentSelectionPhaseTimer--;
-            nextTime = Time.time + countdownInterval;
-        }
-
-        if (currentSelectionPhaseTimer <= 0)
-        {
-            isSelectionPhase = false;
-            currentSelectionPhaseTimer = 0;
-            
-            if (pnlItems != null)
+            Debug.Log($"Item {items[selectedIndex].name} selected!");
+            if (instantiatedItem != null)
             {
-                pnlItems.SetActive(false);
-                isChosen = true;
+                Destroy(instantiatedItem);
             }
 
-            //this will end my selection phase
-            onEndSelectionPhase.Raise();
-            
-            //after selection phase start placement phase
-            isPlacementPhase = true;
-        }
+            instantiatedItem = Instantiate(items[selectedIndex], uiParent);
+            instantiatedItem.transform.localPosition = Vector3.zero; // Center it in UI space
+            instantiatedItem.transform.localScale = Vector3.one;
 
-        timerText.text =
-            "Choose your item before the placement phase: " +
-            currentSelectionPhaseTimer.ToString();
+            EndSelectionPhase();
+        }
     }
 
-
-    // for my placement phase
-    private void onPlacementTimer()
+    private void HandlePlacementInput(PlayerInputs playerInputs)
     {
-        if (currentPlacementTimer > 0 && Time.time >= nextPlacementTime)
+        // Place the object when the player presses the confirm button
+        if (playerInputs.ConfirmPlacement())
         {
-            currentPlacementTimer--;
-            nextPlacementTime = Time.time + countdownInterval;
-        }
+            Debug.Log("Placement Confirmed");
+            isPlacementLocked = true; // Lock placement input
 
-        if (currentPlacementTimer <= 0)
-        {
-            currentPlacementTimer = 0;
-            placementTimerText.enabled = false;
-            _gameTimer.startTimer();
-            onEndPlacementPhase.Raise();
-            
-            //set player inputs as active
-            handleActiveState();
+            // Lock the object in place
+            if (instantiatedItem != null)
+            {
+                instantiatedItem.GetComponent<PlacementChecker>().LockPlacement();
+                EndPlacementPhase();
+            }
         }
-
-        placementTimerText.text =
-            "Place your item before the time runs out: " +
-            currentPlacementTimer.ToString(); 
     }
-    
-    private void HandleDeactivateState()
+
+    private void HandlePlayerDeactivateState()
     {
-        cursor.SetActive(false);
         for (int i = 0; i < _playerInputsArray.Length; i++)
         {
             _playerInputsArray[i].enabled = false;
@@ -130,12 +121,10 @@ public class GameManager : MonoBehaviour
         {
             _playerInputArray[i].enabled = false;
         }    
-
     }
 
-    private void handleActiveState()
+    private void HandlePlayerActiveState()
     {
-        cursor.SetActive(true);
         for (int i = 0; i < _playerInputsArray.Length; i++)
         {
             _playerInputsArray[i].enabled = true;
