@@ -7,12 +7,13 @@ using UnityEngine.UI;
 public class ObjectSelectionMenu : MonoBehaviour
 {
     public GameObject[] objectsToPlace;
-    private int selectedIndex = 0; 
-    public Button[] buttons; 
-    private GameObject currentObject; 
-    private bool objectPlaced = false; 
     public Transform placeholder; 
-
+    public Button[] buttons; 
+    
+    private GameObject currentObject;
+    private Coroutine currentHighlightCoroutine;
+    private int selectedIndex = 0; 
+    private bool objectPlaced = false;
     private void Start()
     {
     
@@ -40,8 +41,6 @@ public class ObjectSelectionMenu : MonoBehaviour
 
     private void HandleCursorSelection()
     {
-
-        // Use the D-Pad or arrow keys for navigation
         if (Gamepad.current != null)
         {
             if (Gamepad.current.dpad.up.wasPressedThisFrame)
@@ -57,30 +56,36 @@ public class ObjectSelectionMenu : MonoBehaviour
         }
     }
 
+
     private void HighlightButton(Button button)
     {
         ResetButtonColors();
-        StartCoroutine(SmoothHighlight(button));
+
+        if (currentHighlightCoroutine != null)
+        {
+            StopCoroutine(currentHighlightCoroutine);
+        }
+        currentHighlightCoroutine = StartCoroutine(SmoothHighlight(button));
     }
 
     private void ResetButtonColors()
     {
-        Color originalColor = Color.white; 
+
+        Color originalColor = Color.white;
         foreach (var btn in buttons)
         {
-            btn.GetComponent<Image>().color = originalColor; 
+            btn.GetComponent<Image>().color = originalColor;
         }
     }
 
     private IEnumerator SmoothHighlight(Button button)
     {
         Color originalColor = button.GetComponent<Image>().color;
-        Color highlightColor = Color.yellow; 
+        Color highlightColor = Color.yellow;
 
-     
-        float duration = 0.3f; 
+        float duration = 0.3f;
         float elapsedTime = 0f;
-        
+
         while (elapsedTime < duration)
         {
             button.GetComponent<Image>().color = Color.Lerp(originalColor, highlightColor, elapsedTime / duration);
@@ -88,7 +93,8 @@ public class ObjectSelectionMenu : MonoBehaviour
             yield return null;
         }
 
-        button.GetComponent<Image>().color = highlightColor; 
+        button.GetComponent<Image>().color = highlightColor;
+        currentHighlightCoroutine = null;
     }
 
     private void CheckForSelectionInput()

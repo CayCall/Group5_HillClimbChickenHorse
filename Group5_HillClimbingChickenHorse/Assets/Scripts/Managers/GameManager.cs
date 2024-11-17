@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,13 +11,17 @@ public class GameManager : MonoBehaviour
     private GameObject instantiatedItem; 
     
     [Header("Placement Phase")]
-    public Transform uiParent; // Cursor as parent for object to spawn on cursor
+    public Transform uiParent; 
+    public Camera mainCamera; // Reference to the main camera
+    public float normalZoom = 5f; // Default camera zoom size
+    public float placementZoom = 10f; // Zoom size during placement phase
+    public float zoomSpeed = 2f; // Speed of zooming
 
     // Deactivate player input 
     [SerializeField] private PlayerInput[] _playerInputsArray;
     [SerializeField] private PlayerInputs[] _playerInputArray;
 
-    private bool isPlacementLocked = false; // Flag to prevent multiple placements
+    private bool isPlacementLocked = false; 
 
     private void Start()
     {
@@ -32,16 +37,17 @@ public class GameManager : MonoBehaviour
 
     private void EndSelectionPhase()
     {
-        pnlItems.SetActive(false); 
+        pnlItems.SetActive(false); // Hide the item selection panel
         Debug.Log("Selection Phase Ended");
-        StartPlacementPhase();
+        StartPlacementPhase(); // Begin placement phase
     }
-
     private void StartPlacementPhase()
     {
         Debug.Log("Placement Phase Started");
         HandlePlayerActiveState();
-        isPlacementLocked = false; // Reset placement lock for the new object
+        isPlacementLocked = false;
+        
+        StartCoroutine(AdjustCameraZoom(placementZoom));
     }
 
     private void EndPlacementPhase()
@@ -50,66 +56,17 @@ public class GameManager : MonoBehaviour
 
         if (instantiatedItem != null)
         {
-            // Ensure the item is locked in place
+            // Lock the object in place
             instantiatedItem.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static; 
         }
+
+        // Smoothly zoom back in the camera
+        StartCoroutine(AdjustCameraZoom(normalZoom));
 
         HandlePlayerDeactivateState();
         // Add logic to transition to the next phase or reset selection
     }
 
-    public void HandleInput(PlayerInputs playerInputs)
-    {
-        if (pnlItems.activeSelf)
-        {
-            HandleSelectionInput(playerInputs);
-        }
-        else if (instantiatedItem != null && !isPlacementLocked)
-        {
-            HandlePlacementInput(playerInputs);
-        }
-    }
-
-    private void HandleSelectionInput(PlayerInputs playerInputs)
-    {
-        if (playerInputs.NavigateDown())
-        {
-            selectedIndex = (selectedIndex + 1) % items.Length;
-            Debug.Log($"Selected Item Index: {selectedIndex}");
-        }
-        
-        if (playerInputs.SelectItem())
-        {
-            Debug.Log($"Item {items[selectedIndex].name} selected!");
-            if (instantiatedItem != null)
-            {
-                Destroy(instantiatedItem);
-            }
-
-            instantiatedItem = Instantiate(items[selectedIndex], uiParent);
-            instantiatedItem.transform.localPosition = Vector3.zero; // Center it in UI space
-            instantiatedItem.transform.localScale = Vector3.one;
-
-            EndSelectionPhase();
-        }
-    }
-
-    private void HandlePlacementInput(PlayerInputs playerInputs)
-    {
-        // Place the object when the player presses the confirm button
-        if (playerInputs.ConfirmPlacement())
-        {
-            Debug.Log("Placement Confirmed");
-            isPlacementLocked = true; // Lock placement input
-
-            // Lock the object in place
-            if (instantiatedItem != null)
-            {
-                instantiatedItem.GetComponent<PlacementChecker>().LockPlacement();
-                EndPlacementPhase();
-            }
-        }
-    }
 
     private void HandlePlayerDeactivateState()
     {
@@ -133,5 +90,19 @@ public class GameManager : MonoBehaviour
         {
             _playerInputArray[i].enabled = true;
         }        
+    }
+
+    private IEnumerator AdjustCameraZoom(float targetZoom)
+    {
+        float currentZoom = mainCamera.orthographicSize;
+
+        while (Mathf.Abs(currentZoom - targetZoom) > 0.01f)
+        {
+            currentZoom = Mathf.Lerp(currentZoom, targetZoom, zoomSpeed * Time.deltaTime);
+            mainCamera.orthographicSize = currentZoom;
+            yield return null;
+        }
+
+        mainCamera.orthographicSize = targetZoom;
     }
 }
