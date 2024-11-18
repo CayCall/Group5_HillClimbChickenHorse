@@ -2443,14 +2443,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsToPlace:
-  - {fileID: 6005647496152963360, guid: 85ab89234cbea0e45840d21046ea3078, type: 3}
-  - {fileID: 5455146377793262034, guid: a01087410b7b66f479a937f94e45e629, type: 3}
   - {fileID: 19196480640225427, guid: 8fa6b9f9e31d56840a93fc5a3d4c3797, type: 3}
+  - {fileID: 6279999778326883405, guid: 6e90e1eb6e458144886dd6117589728f, type: 3}
+  - {fileID: 6005647496152963360, guid: 85ab89234cbea0e45840d21046ea3078, type: 3}
+  placeholder: {fileID: 5169373908061601589}
   buttons:
   - {fileID: 4321863353332479415}
   - {fileID: 7508169259861623332}
   - {fileID: 3786598653074691822}
-  placeholder: {fileID: 5169373908061601589}
 --- !u!1 &8352073185741486932 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5258125958703145748, guid: b9c242b3eb6bca54c89050f313419e01, type: 3}

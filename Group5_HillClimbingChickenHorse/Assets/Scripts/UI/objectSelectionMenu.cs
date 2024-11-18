@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ObjectSelectionMenu : MonoBehaviour
 {
+    public GameManager _gameManager;
     public GameObject[] objectsToPlace;
     public Transform placeholder; 
     public Button[] buttons; 
@@ -14,14 +15,15 @@ public class ObjectSelectionMenu : MonoBehaviour
     private Coroutine currentHighlightCoroutine;
     private int selectedIndex = 0; 
     private bool objectPlaced = false;
+   
+
+    public GameObject menuPanel; 
     private void Start()
     {
-    
         if (buttons.Length == 0)
         {
             buttons = GetComponentsInChildren<Button>();
         }
-
 
         HighlightButton(buttons[selectedIndex]);
     }
@@ -114,7 +116,11 @@ public class ObjectSelectionMenu : MonoBehaviour
         currentObject = Instantiate(objectsToPlace[selectedIndex], placeholder.position, Quaternion.identity, placeholder);
         currentObject.transform.localScale *= 100;
         objectPlaced = true;
+        
+        _gameManager.EndSelectionPhase();
+
     }
+
 
     private Vector3 GetCursorWorldPosition()
     {
@@ -125,11 +131,11 @@ public class ObjectSelectionMenu : MonoBehaviour
     {
         Vector3 originalScale = button.transform.localScale;
 
-        // Scale down
+        //scale down
         button.transform.localScale = originalScale * 0.9f; 
         yield return new WaitForSeconds(0.1f);
 
-        // Scale back up
+        //scale up
         button.transform.localScale = originalScale;
     }
 }
