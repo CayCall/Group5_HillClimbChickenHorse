@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         ZoomOutToPlacement(); // Zoom out to map 
     }
     //after objejct is placed
-    private void EndPlacementPhase()
+    public void EndPlacementPhase()
     {
         Debug.Log("Placement Phase Ended");
 
@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         }
 
         ZoomInToNormal(); // Zoom back to the player
-        HandlePlayerDeactivateState();
+        HandlePlayerActiveState();
     }
     private void HandlePlayerDeactivateState()
     {

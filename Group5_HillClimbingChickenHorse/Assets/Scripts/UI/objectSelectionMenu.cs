@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class ObjectSelectionMenu : MonoBehaviour
 {
     public GameManager _gameManager;
     public GameObject[] objectsToPlace;
     public Transform placeholder; 
+    public Transform obstacleParent; 
     public Button[] buttons; 
     
     private GameObject currentObject;
+    private GameObject inWorldObject;
     private Coroutine currentHighlightCoroutine;
     private int selectedIndex = 0; 
     private bool objectPlaced = false;
@@ -30,9 +33,12 @@ public class ObjectSelectionMenu : MonoBehaviour
 
     private void Update()
     {
-        if (!gameObject.activeSelf) return; 
+        if (!gameObject.activeSelf) return;
 
-        HandleCursorSelection();
+        if (!objectPlaced)
+        {
+            HandleCursorSelection();
+        }
         CheckForSelectionInput();
         
         if (currentObject != null)
@@ -106,9 +112,24 @@ public class ObjectSelectionMenu : MonoBehaviour
             if (!objectPlaced)
             {
                 PlaceObjectAtCursor();
-                StartCoroutine(ButtonPressAnimation(buttons[selectedIndex])); 
+                StartCoroutine(ButtonPressAnimation(buttons[selectedIndex]));
+            }
+            else
+            {
+                PlaceObjectInWorld();
             }
         }
+    }
+
+    private void PlaceObjectInWorld()
+    {
+        var worldPos = GetCursorWorldPosition();
+        Debug.Log(selectedIndex);
+        inWorldObject = Instantiate(objectsToPlace[selectedIndex], placeholder.position, Quaternion.identity, obstacleParent);
+        inWorldObject.transform.localScale *= 10;//edit here to get correct size
+        Destroy(currentObject);
+        
+        _gameManager.EndPlacementPhase();
     }
 
     private void PlaceObjectAtCursor()
