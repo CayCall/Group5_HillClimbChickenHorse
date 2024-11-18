@@ -118,7 +118,7 @@ public class ObjectSelectionMenu : MonoBehaviour
         objectPlaced = true;
         
         _gameManager.EndSelectionPhase();
-
+        
     }
 
 

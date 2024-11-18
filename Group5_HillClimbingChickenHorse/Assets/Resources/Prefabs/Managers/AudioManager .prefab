@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1580768519672670747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5750511133917658494}
+  - component: {fileID: 3699216262765301908}
+  - component: {fileID: 3584217348469632803}
+  m_Layer: 0
+  m_Name: 'AudioManager '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5750511133917658494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580768519672670747}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3699216262765301908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580768519672670747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce362f4453cf5b048845418df89903f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClips:
+  - identifier: RambleyIntro
+    clip: {fileID: 8300000, guid: 6de48410940018b4e870e193571d5d0b, type: 3}
+  - identifier: RambleyReg
+    clip: {fileID: 8300000, guid: c048438260ac93c4c944ad4205d7649c, type: 3}
+  - identifier: RambleyMainGate
+    clip: {fileID: 8300000, guid: 8e7f3e08e7b44794d9d76358ae07f445, type: 3}
+  - identifier: RambleyGenerator
+    clip: {fileID: 8300000, guid: ba20390687108e545997f680da2cdfc4, type: 3}
+  - identifier: RambleyOpengate
+    clip: {fileID: 8300000, guid: f60aca9268528fd40abc7e316d27fa58, type: 3}
+  - identifier: RambleyCritterIntro
+    clip: {fileID: 8300000, guid: 54b2d9b3e68795841a01194cea241c1c, type: 3}
+  - identifier: RambleyCritterReceive
+    clip: {fileID: 8300000, guid: a3d7b89632241fd45a8205fb831b3137, type: 3}
+  - identifier: RambleyTheatre
+    clip: {fileID: 8300000, guid: f4afb507b4e8c3043a2bcc771fd479d0, type: 3}
+  audioVolume: 0.2
+  onAudioComplete:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3584217348469632803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580768519672670747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce362f4453cf5b048845418df89903f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClips: []
+  audioVolume: 0.25
+  onAudioComplete:
+    m_PersistentCalls:
+      m_Calls: []

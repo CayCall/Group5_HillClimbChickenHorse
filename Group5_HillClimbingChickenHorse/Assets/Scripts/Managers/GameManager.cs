@@ -145,5 +145,5 @@ public void ZoomOutToPlacement()
     Vector3 mapPosition = new Vector3(mapCenter.x, mapCenter.y, Camera.transform.position.z);
     StartCoroutine(AdjustCameraZoom(placementZoom, mapPosition));
 }
-
+// game loop 
 }
