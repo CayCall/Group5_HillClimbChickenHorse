@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     [Header("Placement Phase")]
     public Transform uiParent; 
     public CinemachineVirtualCamera Camera;
-    public float normalZoom = 5f; // Default camera zoom size
+    public float normalZoom = 1f; // Default camera zoom size
     public float placementZoom = 100f; // Zoom size during placement phase
     public float zoomSpeed = 2f; // Speed of zooming
 

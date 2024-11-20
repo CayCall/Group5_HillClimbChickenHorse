@@ -7,6 +7,9 @@ TagManager:
   - CarPart
   - Ground
   - Selectable
+  - GameManager
+  - Obstacle
+  - Placeable
   layers:
   - Default
   - TransparentFX
@@ -14,8 +17,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Body
+  - Wheels
   - 
   - 
   - 

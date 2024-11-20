@@ -13,6 +13,10 @@ public class ObjectSelectionMenu : MonoBehaviour
     public Transform obstacleParent; 
     public Button[] buttons; 
     
+    [SerializeField] private float rayDistance = 10f; // Distance the ray will travel
+    [SerializeField] private string targetTag = "Target"; // Tag to look for
+    [SerializeField] private GameObject rayOrigin;
+    
     private GameObject currentObject;
     private GameObject inWorldObject;
     private Coroutine currentHighlightCoroutine;
@@ -126,7 +130,7 @@ public class ObjectSelectionMenu : MonoBehaviour
         var worldPos = GetCursorWorldPosition();
         Debug.Log(selectedIndex);
         inWorldObject = Instantiate(objectsToPlace[selectedIndex], placeholder.position, Quaternion.identity, obstacleParent);
-        inWorldObject.transform.localScale *= 10;//edit here to get correct size
+        inWorldObject.transform.localScale *= 5;//edit here to get correct size
         Destroy(currentObject);
         
         _gameManager.EndPlacementPhase();
@@ -139,7 +143,39 @@ public class ObjectSelectionMenu : MonoBehaviour
         objectPlaced = true;
         
         _gameManager.EndSelectionPhase();
-        
+
+    }
+    
+    private bool PerformRaycast()
+    {
+        // Get the cursor's world position
+        Vector3 origin = rayOrigin.transform.position; // Position of the cursor GameObject
+        Vector3 direction = Vector3.forward; // Ray goes into the screen (Z-axis)
+
+        // Perform the raycast
+        Ray ray = new Ray(origin, direction);
+        if (Physics.Raycast(ray, out RaycastHit hit, rayDistance))
+        {
+            // Check if the hit object's tag matches the target tag
+            if (hit.collider.CompareTag(targetTag))
+            {
+                Debug.Log($"Hit {hit.collider.gameObject.name} with tag {targetTag}");
+                return true;
+            }
+            else
+            {
+                Debug.Log($"Hit {hit.collider.gameObject.name}, but tag does not match.");
+                return false;
+            }
+        }
+        else
+        {
+            Debug.Log("No object hit.");
+            return false;
+        }
+
+        // Visualize the ray in the Scene view
+        Debug.DrawRay(origin, direction * rayDistance, Color.red, 1f);
     }
 
 

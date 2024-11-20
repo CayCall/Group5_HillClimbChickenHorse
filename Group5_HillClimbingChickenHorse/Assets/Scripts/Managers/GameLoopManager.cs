@@ -53,6 +53,9 @@ public class GameLoopManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        CheckNextStep();
+        if (col.CompareTag("End"))
+        {
+            CheckNextStep();
+        }
     }
 }
