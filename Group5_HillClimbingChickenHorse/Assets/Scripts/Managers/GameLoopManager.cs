@@ -9,38 +9,24 @@ public class GameLoopManager : MonoBehaviour
     [SerializeField] private int numberOfRounds;
     [SerializeField] private int currentRound;
     [SerializeField] private string nextLevel;
-    [SerializeField] private Vector3 startPosition;
-    [SerializeField] private GameObject player;
+    [SerializeField] private Transform startPosition1;
+    [SerializeField] private Transform startPosition2;
+    [SerializeField] private GameObject wheel1;
+    [SerializeField] private GameObject wheel2;
     [SerializeField] private GameManager gameManager;
 
     private void Start()
     {
         currentRound = 0;
-        player = gameObject;
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.CompareTag("End"))
-        {
-            CheckNextStep();
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.collider.CompareTag("Obstacle"))
-        {
-            ResetPlayer();
-        }
-    }
-
+    
     private void CheckNextStep()
     {
-        if (currentRound != numberOfRounds)
+        if (currentRound < numberOfRounds)
         {
-            player.transform.position = startPosition;
+            wheel1.transform.position = startPosition1.position;
+            wheel2.transform.position = startPosition2.position;
             currentRound++;
             gameManager.StartSelectionPhase();
         }
@@ -52,6 +38,21 @@ public class GameLoopManager : MonoBehaviour
 
     private void ResetPlayer()
     {
-        player.transform.position = startPosition;
+        wheel1.transform.position = startPosition1.position;
+        wheel2.transform.position = startPosition2.position;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Obstacle"))
+        {
+            Debug.Log("Hit");
+            ResetPlayer();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        CheckNextStep();
     }
 }
