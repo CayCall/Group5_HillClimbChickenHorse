@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CC;
 using UnityEngine;
 
 public class PlayerEffects : MonoBehaviour
@@ -11,6 +12,7 @@ public class PlayerEffects : MonoBehaviour
     public PlayerInputs playerInputs;
     public float throttleThreshold = 0.5f;
     public float brakeThreshold = -0.5f;
+    public CharacterControlerBasic CharacterControlerBasic;
 
     private void Start()
     {
@@ -26,7 +28,7 @@ public class PlayerEffects : MonoBehaviour
 
     void Update()
     {
-        if (playerInputs != null)
+        if (playerInputs != null && CharacterControlerBasic.grounded)
         {
             HandleEffects();
         }
