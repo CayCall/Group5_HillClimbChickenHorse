@@ -81,15 +81,13 @@ public class GameManager : MonoBehaviour
     public void EndPlacementPhase()
     {
         Debug.Log("Placement Phase Ended");
-
+        ZoomInToNormal();
+        cursor.SetActive(false);
+        HandlePlayerActiveState();
         if (instantiatedItem != null)
         {
             instantiatedItem.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         }
-
-        ZoomInToNormal();
-        cursor.SetActive(false);
-        HandlePlayerActiveState();
     }
     private void HandlePlayerDeactivateState()
     {
