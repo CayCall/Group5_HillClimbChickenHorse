@@ -29,4 +29,15 @@ public class SceneLoaders : MonoBehaviour
     {
         SceneManager.LoadScene("");
     }
+    
+    //Pause menus 
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void UnPauseGame()
+    {
+        Time.timeScale = 1f;    
+    }
 }
