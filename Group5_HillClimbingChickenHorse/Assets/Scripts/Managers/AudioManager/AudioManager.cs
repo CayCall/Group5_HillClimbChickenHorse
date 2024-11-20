@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class AudioManager : MonoBehaviour
 {
@@ -14,15 +12,13 @@ public class AudioManager : MonoBehaviour
         public AudioClip clip;
     }
 
-    [Header("Clips")]
+    [Header("Audio Clips")]
     public List<AudioClipEntry> audioClips;
 
-    [Header("Audio Volume")]
-    public float audioVolume = 0.25f;
+    [Header("Audio Settings")]
+    public float audioVolume = 0.5f;
 
     private Dictionary<string, AudioClip> audioClipDictionary;
-
-    public UnityEvent onAudioComplete; 
 
     private void Awake()
     {
@@ -35,14 +31,8 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-        if (onAudioComplete == null)
-        {
-            onAudioComplete = new UnityEvent();
-        }
 
         audioClipDictionary = new Dictionary<string, AudioClip>();
-
         foreach (AudioClipEntry entry in audioClips)
         {
             if (!audioClipDictionary.ContainsKey(entry.identifier))
@@ -52,23 +42,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayAudio(string identifier)
+    public void PlayAudio(string identifier, Vector3 position)
     {
         if (audioClipDictionary.ContainsKey(identifier))
         {
-            AudioSource.PlayClipAtPoint(audioClipDictionary[identifier], Camera.main.transform.position, audioVolume);
-            Debug.Log("Played audio: " + identifier);
-            StartCoroutine(WaitForAudioToEnd(audioClipDictionary[identifier].length));
+            AudioSource.PlayClipAtPoint(audioClipDictionary[identifier], position, audioVolume);
         }
         else
         {
             Debug.LogWarning("Audio identifier not found: " + identifier);
         }
-    }
-
-    private IEnumerator WaitForAudioToEnd(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        onAudioComplete?.Invoke(); 
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -128,7 +129,6 @@ public class ObjectSelectionMenu : MonoBehaviour
     private void PlaceObjectInWorld()
     {
         var worldPos = GetCursorWorldPosition();
-        Debug.Log(selectedIndex);
         inWorldObject = Instantiate(objectsToPlace[selectedIndex], placeholder.position, Quaternion.identity, obstacleParent);
         inWorldObject.transform.localScale *= 5;//edit here to get correct size
         Destroy(currentObject);
