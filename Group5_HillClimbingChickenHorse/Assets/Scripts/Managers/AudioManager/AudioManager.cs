@@ -16,7 +16,8 @@ public class AudioManager : MonoBehaviour
 
     [Header("Clips")]
     public List<AudioClipEntry> audioClips;
-
+    
+    [Header("")]
     [Header("Audio Volume")]
     public float audioVolume = 0.25f;
 

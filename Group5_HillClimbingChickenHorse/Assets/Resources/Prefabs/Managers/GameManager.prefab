@@ -46,6 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d501885dbb3194e88469c4dbdccd24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
+  _playerInputsArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  _playerInputArray:
+  - {fileID: 0}
+  - {fileID: 0}
   pnlItems: {fileID: 0}
   items:
   - {fileID: 6005647496152963360, guid: 85ab89234cbea0e45840d21046ea3078, type: 3}
@@ -54,14 +61,10 @@ MonoBehaviour:
   uiParent: {fileID: 0}
   Camera: {fileID: 0}
   normalZoom: 5
-  placementZoom: 10
+  placementZoom: 100
   zoomSpeed: 2
-  _playerInputsArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  _playerInputArray:
-  - {fileID: 0}
-  - {fileID: 0}
+  player: {fileID: 0}
+  mapCenter: {x: 0, y: 0, z: 0}
 --- !u!114 &7592105380740198844
 MonoBehaviour:
   m_ObjectHideFlags: 0

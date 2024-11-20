@@ -8,7 +8,7 @@ public class playerAudio : MonoBehaviour
     public PlayerInputs playerInputs; 
     public AudioSource engineAudio;  
     public float minPitch = 0.8f;   
-    public float maxPitch = 2.0f;    
+    public float maxPitch = 2f;    
 
     void Start()
     {
