@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     }
     
 
-    private void StartSelectionPhase()
+    public void StartSelectionPhase()
     {
         pnlItems.SetActive(true); 
         Debug.Log("Selection Phase Started");
