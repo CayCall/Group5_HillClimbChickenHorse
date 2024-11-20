@@ -14,8 +14,8 @@ public class ObjectSelectionMenu : MonoBehaviour
     public Transform obstacleParent; 
     public Button[] buttons; 
     
-    [SerializeField] private float rayDistance = 10f; // Distance the ray will travel
-    [SerializeField] private string targetTag = "Target"; // Tag to look for
+    [SerializeField] private float rayDistance = 10f; 
+    [SerializeField] private string targetTag = "Target"; 
     [SerializeField] private GameObject rayOrigin;
     
     private GameObject currentObject;
@@ -25,7 +25,8 @@ public class ObjectSelectionMenu : MonoBehaviour
     private bool objectPlaced = false;
    
 
-    public GameObject menuPanel; 
+    public GameObject menuPanel;
+    public AudioSource menuSound;
     private void Start()
     {
         if (buttons.Length == 0)
@@ -56,14 +57,16 @@ public class ObjectSelectionMenu : MonoBehaviour
     {
         if (Gamepad.current != null)
         {
-            if (Gamepad.current.dpad.up.wasPressedThisFrame)
-            {
-                selectedIndex = (selectedIndex - 1 + buttons.Length) % buttons.Length;
-                HighlightButton(buttons[selectedIndex]);
-            }
             if (Gamepad.current.dpad.down.wasPressedThisFrame)
             {
+                selectedIndex = (selectedIndex - 1 + buttons.Length) % buttons.Length;
+                menuSound.Play();
+                HighlightButton(buttons[selectedIndex]);
+            }
+            if (Gamepad.current.dpad.up.wasPressedThisFrame)
+            {
                 selectedIndex = (selectedIndex + 1) % buttons.Length;
+                menuSound.Play();
                 HighlightButton(buttons[selectedIndex]);
             }
         }

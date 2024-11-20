@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class AudioTrigger : MonoBehaviour
@@ -14,16 +15,21 @@ public class AudioTrigger : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    async private void  OnCollisionEnter2D(Collision2D col)
     {
         if (!hasBeenTriggered && col.collider.CompareTag("Wheel"))
         {
             hasBeenTriggered = true;
             PlayAudio();
-         
+            await WaitOneSecond(); 
+            hasBeenTriggered = false;
         }
     }
-    
+    private async Task WaitOneSecond()
+    {
+        await Task.Delay(1000); //1000 milliseconds 
+    }
+
      private void OnCollisionExit2D(Collision2D col)
         {
        
