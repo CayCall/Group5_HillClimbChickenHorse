@@ -179,7 +179,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 27.01, y: -29.59, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3850080712750801347}
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killerSwingBase: {fileID: 5197467912328840714}
-  timeForFullRotation: 1
+  timeForFullRotation: 2
 --- !u!58 &4227048373926870267
 CircleCollider2D:
   m_ObjectHideFlags: 0
