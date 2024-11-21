@@ -29,8 +29,10 @@ public class GameManager : MonoBehaviour
     // Deactivate player input 
     [SerializeField] private PlayerInput[] _playerInputsArray;
     [SerializeField] private PlayerInputs[] _playerInputArray;
+    
 
     private bool isPlacementLocked = false; 
+
     
     //for zooming placements
     [Header("Camera Targets")]
@@ -38,12 +40,11 @@ public class GameManager : MonoBehaviour
     public Transform MapTransform; // Reference to the map's Transform
     private void Start()
     {
-        Cursor.SetActive(true);
         // Ensure the camera starts at the normal zoom level
         Camera.m_Lens.OrthographicSize = normalZoom;
 
         // Begin the selection phase
-        StartSelectionPhase();
+       // StartSelectionPhase();
     }
 
 

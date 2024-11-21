@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abec4b7d30656ed448c5afdda1cffa22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfRounds: 5
+  numberOfRounds: 0
   currentRound: 0
-  nextLevel: 
+  nextLevel: 'Test Scene '
   startPosition1: {fileID: 0}
   startPosition2: {fileID: 0}
   wheel1: {fileID: 0}

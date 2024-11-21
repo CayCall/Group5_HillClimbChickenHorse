@@ -23,7 +23,8 @@ public class GameLoopManager : MonoBehaviour
     
     private void CheckNextStep()
     {
-        if (currentRound < numberOfRounds)
+   
+        if (currentRound < numberOfRounds )
         {
             wheel1.transform.position = startPosition1.position;
             wheel2.transform.position = startPosition2.position;
@@ -56,6 +57,10 @@ public class GameLoopManager : MonoBehaviour
         if (col.CompareTag("End"))
         {
             CheckNextStep();
+        }
+        else
+        {
+            Debug.LogError("Get chowed");
         }
     }
 }
