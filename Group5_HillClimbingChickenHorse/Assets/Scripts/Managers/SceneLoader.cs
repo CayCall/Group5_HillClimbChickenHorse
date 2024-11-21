@@ -20,16 +20,13 @@ public class SceneLoaders : MonoBehaviour
     }
     public void LoadStartScene()
     {
-        SceneManager.LoadScene("StartScene");    
+        SceneManager.LoadScene("Scenes/StartScene");    
     }
     public void LoadMainScene()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Scenes/Micheal/Level 1");
     }
-    public void LoadEndScene()
-    {
-        SceneManager.LoadScene("");
-    }
+
 
     public void OnApplicationQuit()
     {
