@@ -1,64 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class AudioTrigger : MonoBehaviour
 {
-  
-    public string audioIdentifier;
-    public AudioTrigger nextTrigger;
+    private AudioSource audioSource;
+    [SerializeField]private bool hasBeenTriggered = false;
 
-    private bool hasBeenTriggered = false;
-
-    private void OnEnable()
+    void Start()
     {
-        if (AudioManager.instance != null)
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
         {
-            AudioManager.instance.onAudioComplete.AddListener(OnAudioComplete);
+            Debug.LogError("No AudioSource component found on this GameObject.");
+        }
+    }
+
+    async private void  OnCollisionEnter2D(Collision2D col)
+    {
+        if (!hasBeenTriggered && col.collider.CompareTag("Wheel"))
+        {
+            hasBeenTriggered = true;
+            PlayAudio();
+            await WaitOneSecond(); 
+            hasBeenTriggered = false;
+        }
+    }
+    
+    async private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!hasBeenTriggered && other.CompareTag("Wheel"))
+        {
+            hasBeenTriggered = true;
+            PlayAudio();
+            await WaitOneSecond(); 
+            hasBeenTriggered = false;
+        }
+    }
+    private async Task WaitOneSecond()
+    {
+        await Task.Delay(1000); 
+    }
+
+     private void OnCollisionExit2D(Collision2D col)
+        {
+       
+            if (!hasBeenTriggered && col.collider.CompareTag("Wheel"))
+            {
+                hasBeenTriggered = false;   
+                stopAudio();
+            }
+        }
+    private void PlayAudio()
+    {
+        if (audioSource != null)
+        {
+            audioSource.Play();
         }
         else
         {
-            Debug.LogError("AudioManager instance is null.");
+            Debug.LogWarning("AudioSource is null");
         }
     }
 
-    private void OnDisable()
+    private void stopAudio()
     {
-        if (AudioManager.instance != null)
+        if (audioSource != null)
         {
-            AudioManager.instance.onAudioComplete.RemoveListener(OnAudioComplete);
+            audioSource.Stop();
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Enetered");
-        if (!hasBeenTriggered && other.CompareTag("1layer"))
+        else
         {
-            if (AudioManager.instance != null)
-            {
-                AudioManager.instance.PlayAudio(audioIdentifier);
-                hasBeenTriggered = true;
-                DisableTrigger();
-            }
-            else
-            {
-                Debug.LogError("AudioManager instance is null.");
-            }
+            Debug.LogWarning("Audio is null");
         }
-    }
-
-    private void DisableTrigger()
-    {
-        GetComponent<Collider>().enabled = false;
-    }
-
-    private void OnAudioComplete()
-    {
-        if (nextTrigger != null)
-        {
-            nextTrigger.gameObject.SetActive(true);
-        }
-        gameObject.SetActive(false);
     }
 }

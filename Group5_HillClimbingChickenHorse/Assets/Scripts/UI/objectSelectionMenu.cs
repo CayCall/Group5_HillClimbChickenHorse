@@ -1,8 +1,11 @@
 using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+
 using UnityEngine.XR;
 
 public class ObjectSelectionMenu : MonoBehaviour
@@ -11,11 +14,10 @@ public class ObjectSelectionMenu : MonoBehaviour
     public GameObject[] objectsToPlace;
     public Transform placeholder; 
     public Transform obstacleParent; 
-    public Button[] buttons;
-    public bool objectInWorld;
+    public Button[] buttons; 
     
-    [SerializeField] private float rayDistance = 10f; // Distance the ray will travel
-    [SerializeField] private string targetTag = "Target"; // Tag to look for
+    [SerializeField] private float rayDistance = 10f; 
+    [SerializeField] private string targetTag = "Target"; 
     [SerializeField] private GameObject rayOrigin;
     
     private GameObject currentObject;
@@ -25,7 +27,11 @@ public class ObjectSelectionMenu : MonoBehaviour
     private bool objectPlaced = false;
    
 
-    public GameObject menuPanel; 
+    public GameObject menuPanel;
+    public AudioSource menuPanelSound;
+    public AudioSource menuPanelConfirm;
+    public AudioSource menuPanelPlace;
+    
     private void Start()
     {
         if (buttons.Length == 0)
@@ -56,14 +62,16 @@ public class ObjectSelectionMenu : MonoBehaviour
     {
         if (Gamepad.current != null)
         {
-            if (Gamepad.current.dpad.up.wasPressedThisFrame)
-            {
-                selectedIndex = (selectedIndex - 1 + buttons.Length) % buttons.Length;
-                HighlightButton(buttons[selectedIndex]);
-            }
             if (Gamepad.current.dpad.down.wasPressedThisFrame)
             {
+                selectedIndex = (selectedIndex - 1 + buttons.Length) % buttons.Length;
+                menuPanelSound.Play();
+                HighlightButton(buttons[selectedIndex]);
+            }
+            if (Gamepad.current.dpad.up.wasPressedThisFrame)
+            {
                 selectedIndex = (selectedIndex + 1) % buttons.Length;
+                menuPanelSound.Play();
                 HighlightButton(buttons[selectedIndex]);
             }
         }
@@ -119,26 +127,31 @@ public class ObjectSelectionMenu : MonoBehaviour
                 PlaceObjectAtCursor();
                 StartCoroutine(ButtonPressAnimation(buttons[selectedIndex]));
             }
-            else if(!objectInWorld)
+            else
             {
+        
                 PlaceObjectInWorld();
+            
             }
         }
     }
 
-    private void PlaceObjectInWorld()
+    async private void PlaceObjectInWorld()
     {
+     
+        menuPanelPlace.Play();
+        await WaitOneSecond(); 
         var worldPos = GetCursorWorldPosition();
-        Debug.Log(selectedIndex);
         inWorldObject = Instantiate(objectsToPlace[selectedIndex], placeholder.position, Quaternion.identity, obstacleParent);
         inWorldObject.transform.localScale *= 5;//edit here to get correct size
         Destroy(currentObject);
-        objectInWorld = true;
         _gameManager.EndPlacementPhase();
     }
 
-    private void PlaceObjectAtCursor()
+    async private void PlaceObjectAtCursor()
     {
+        menuPanelConfirm.Play();
+        await WaitOneSecond(); 
         currentObject = Instantiate(objectsToPlace[selectedIndex], placeholder.position, Quaternion.identity, placeholder);
         currentObject.transform.localScale *= 100;
         objectPlaced = true;
@@ -195,5 +208,9 @@ public class ObjectSelectionMenu : MonoBehaviour
 
         //scale up
         button.transform.localScale = originalScale;
+    }
+    private async Task WaitOneSecond()
+    {
+        await Task.Delay(1000); 
     }
 }

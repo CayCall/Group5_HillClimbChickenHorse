@@ -10,6 +10,8 @@ TagManager:
   - GameManager
   - Obstacle
   - Placeable
+  - End
+  - Wheel
   layers:
   - Default
   - TransparentFX

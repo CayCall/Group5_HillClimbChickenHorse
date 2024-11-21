@@ -55,6 +55,7 @@ public class GameLoopManager : MonoBehaviour
     {
         if (col.CompareTag("End"))
         {
+            Debug.Log("WE ARE ALMOST DERRRR");
             CheckNextStep();
         }
     }

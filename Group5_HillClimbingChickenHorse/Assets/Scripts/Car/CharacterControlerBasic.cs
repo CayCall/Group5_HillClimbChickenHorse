@@ -27,7 +27,7 @@ namespace CC
 
         public WheelPosition wheelPosition;
 
-        private bool grounded;
+        public bool grounded;
 
         private Gamepad pad;
 
@@ -103,6 +103,7 @@ namespace CC
             if (col.gameObject.CompareTag("Ground"))
             {
                 grounded = true;
+                
             }
         } 
         private void OnCollisionEnter2D(Collision2D col)
@@ -114,6 +115,8 @@ namespace CC
 
                 // Trigger low-frequency rumble only on ground hit
                 Rumble(1, 0, 0.25f);
+
+
             }
         }
 

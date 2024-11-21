@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using Cinemachine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,14 +12,16 @@ public class GameManager : MonoBehaviour
     public GameObject[] items;
     private int selectedIndex = 0; 
     private GameObject instantiatedItem;
-    [SerializeField]private ObjectSelectionMenu objectSelectionMenu;
+
     
     [Header("Placement Phase")]
     public Transform uiParent; 
     public CinemachineVirtualCamera Camera;
     public float normalZoom = 1f; // Default camera zoom size
     public float placementZoom = 100f; // Zoom size during placement phase
-    public float zoomSpeed = 2f; // Speed of zooming
+    public float zoomSpeed = 1f; // Speed of zooming
+    public GameObject placementText;
+    public GameObject Cursor;
 
     // Deactivate player input 
     [SerializeField] private PlayerInput[] _playerInputsArray;
@@ -29,16 +32,17 @@ public class GameManager : MonoBehaviour
     //for zooming placements
     [Header("Camera Targets")]
     public Transform player; // Reference to the player's position
-    public Vector3 mapCenter; // Center position of the map
-
+    public Transform MapTransform; // Reference to the map's Transform
     private void Start()
     {
+        Cursor.SetActive(true);
         // Ensure the camera starts at the normal zoom level
         Camera.m_Lens.OrthographicSize = normalZoom;
 
         // Begin the selection phase
         StartSelectionPhase();
     }
+
 
     private void Update()
     {
@@ -58,7 +62,6 @@ public class GameManager : MonoBehaviour
     {
         pnlItems.SetActive(true); 
         Debug.Log("Selection Phase Started");
-        objectSelectionMenu.objectInWorld = false;
         HandlePlayerDeactivateState();
     }
 
@@ -88,6 +91,12 @@ public class GameManager : MonoBehaviour
 
         ZoomInToNormal(); // Zoom back to the player
         HandlePlayerActiveState();
+        
+        // hide placement text
+        placementText.SetActive(false);
+        //hide cursor
+        Cursor.SetActive(false);
+        
     }
     private void HandlePlayerDeactivateState()
     {
@@ -114,37 +123,43 @@ public class GameManager : MonoBehaviour
     }
 
 
-private IEnumerator AdjustCameraZoom(float targetZoom, Vector3 targetPosition)
-{
-    float currentZoom = Camera.m_Lens.OrthographicSize;
-    Vector3 currentPosition = Camera.transform.position;
-
-    while (Mathf.Abs(currentZoom - targetZoom) > 0.01f || Vector3.Distance(currentPosition, targetPosition) > 0.01f)
+    private IEnumerator AdjustCameraZoom(float targetZoom, Vector3 targetPosition)
     {
-        // Smoothly interpolate zoom
-        currentZoom = Mathf.Lerp(currentZoom, targetZoom, zoomSpeed * Time.deltaTime);
-        Camera.m_Lens.OrthographicSize = currentZoom;
+        float currentZoom = Camera.m_Lens.OrthographicSize;
+        Vector3 currentPosition = Camera.transform.position;
 
-        // Smoothly interpolate position
-        currentPosition = Vector3.Lerp(currentPosition, targetPosition, zoomSpeed * Time.deltaTime);
-        Camera.transform.position = currentPosition;
+        while (Mathf.Abs(currentZoom - targetZoom) > 0.01f || Vector3.Distance(currentPosition, targetPosition) > 0.01f)
+        {
+            // Smoothly interpolate zoom
+            currentZoom = Mathf.Lerp(currentZoom, targetZoom, zoomSpeed * Time.deltaTime);
+            Camera.m_Lens.OrthographicSize = currentZoom;
 
-        yield return null;
+            // Smoothly interpolate position
+            currentPosition = Vector3.Lerp(currentPosition, targetPosition, zoomSpeed * Time.deltaTime);
+            Camera.transform.position = currentPosition;
+
+            yield return null;
+        }
+
+        // Ensure final values are set precisely
+        Camera.m_Lens.OrthographicSize = targetZoom;
+        Camera.transform.position = targetPosition;
     }
-
-    // Ensure final values are set precisely
-    Camera.m_Lens.OrthographicSize = targetZoom;
-    Camera.transform.position = targetPosition;
-}
 
 public void ZoomInToNormal()
 {
     StartCoroutine(AdjustCameraZoom(normalZoom, player.position));
 }
-
 public void ZoomOutToPlacement()
 {
-    Vector3 mapPosition = new Vector3(mapCenter.x, mapCenter.y, Camera.transform.position.z);
+    if (MapTransform == null)
+    {
+        Debug.LogError("MapTransform is not assigned!");
+        return;
+    }
+
+    Vector3 mapPosition = new Vector3(MapTransform.position.x, MapTransform.position.y, Camera.transform.position.z);
+    Debug.Log($"Zooming out to MapTransform at position: {mapPosition}");
     StartCoroutine(AdjustCameraZoom(placementZoom, mapPosition));
 }
 // game loop 
