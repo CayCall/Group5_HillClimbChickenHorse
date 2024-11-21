@@ -124,14 +124,16 @@ public class PlayerInputs : MonoBehaviour
             if (Gamepad.current.buttonNorth.wasPressedThisFrame)
             {
                 wheel.transform.position = wheelPos.transform.position;
-                isOpened = !isOpened; 
-                pauseMenu.SetActive(isOpened); 
+                isOpened = false; 
+                pauseMenu.SetActive(false);
+                Time.timeScale = 1f;
             }
-            if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+            if (Gamepad.current.buttonEast.wasPressedThisFrame)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                isOpened = !isOpened; 
-                pauseMenu.SetActive(isOpened); 
+                isOpened = false; 
+                pauseMenu.SetActive(false); 
+                Time.timeScale = 1f;
             }
         }
     }
