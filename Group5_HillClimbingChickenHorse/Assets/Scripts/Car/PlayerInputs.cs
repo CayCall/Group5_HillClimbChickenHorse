@@ -6,6 +6,7 @@ using CC;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerInputs : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class PlayerInputs : MonoBehaviour
     public GameObject pauseMenu;
     private bool isOpened = false;
     [SerializeField] private AudioSource pauseSound;
+    public GameObject wheel;
+    public GameObject wheelPos;
     
     private void Update()
     {
@@ -113,6 +116,22 @@ public class PlayerInputs : MonoBehaviour
                 {
                     pauseSound.Play();
                 }
+            }
+        }
+
+        if (isOpened)
+        {
+            if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+            {
+                wheel.transform.position = wheelPos.transform.position;
+                isOpened = !isOpened; 
+                pauseMenu.SetActive(isOpened); 
+            }
+            if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                isOpened = !isOpened; 
+                pauseMenu.SetActive(isOpened); 
             }
         }
     }
