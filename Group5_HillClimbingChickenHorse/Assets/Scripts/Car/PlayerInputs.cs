@@ -1,35 +1,48 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using CC;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerInputs : MonoBehaviour
 {
     public Vector2 cursorMoveDirction;
     public float throttle;
     public bool useKeyboard;
+    public float positive;
+    public float negative;
 
+    //pause menu
+    public GameObject pauseMenu;
+    private bool isOpened = false;
+    [SerializeField] private AudioSource pauseSound;
+    public GameObject wheel;
+    public GameObject wheelPos;
+    
     private void Update()
     {
         // Continuously call input methods
         Gas();
         Cursor();
         Select();
+        PauseGame();
     }
 
     // Method to detect gas (acceleration) inputs from both Gamepad and Keyboard
     public void Gas()
     {
-        float positive = 0f;
-        float negative = 0f;
+        positive = 0f;
+        negative = 0f;
 
         if (Gamepad.current != null && Gamepad.current.enabled)  // Ensure gamepad is connected
         {
             positive = Gamepad.current.rightTrigger.ReadValue(); 
             negative = Gamepad.current.leftTrigger.ReadValue();
-            Debug.Log("cont connected");
+       
         }
         if (Keyboard.current != null && useKeyboard)  // Fallback to keyboard input
         {
@@ -41,6 +54,7 @@ public class PlayerInputs : MonoBehaviour
         throttle = positive - negative;
         //Debug.Log("Direction is " + throttle);
     }
+    
 
     // Method to continuously track cursor movement (e.g., left stick on gamepad)
     public void Cursor()
@@ -63,6 +77,61 @@ public class PlayerInputs : MonoBehaviour
             if (select)
             {
                 //Debug.Log("Select button was pressed");
+            }
+        }
+    }
+  
+    public bool NavigateDown()
+    {
+        // Down D-Pad 
+        return Gamepad.current.dpad.down.wasPressedThisFrame;
+    }
+
+    public bool SelectItem()
+    {
+        // Button South press (e.g., A/X)
+        return Gamepad.current.buttonSouth.wasPressedThisFrame;
+    }
+
+    public bool ConfirmPlacement()
+    {
+        // Check if Button South is pressed again for placement
+        return Gamepad.current.buttonSouth.wasPressedThisFrame;
+    }
+
+
+    public void PauseGame()
+    {
+        if (Gamepad.current != null && Gamepad.current.enabled)
+        {
+            // Detect button press (not hold)
+            if (Gamepad.current.startButton.wasPressedThisFrame && pauseMenu != null)
+            {
+                isOpened = !isOpened; 
+                pauseMenu.SetActive(isOpened); 
+                Time.timeScale = isOpened ? 0f : 1f; 
+                pauseSound.Play();
+                // Play sound for toggling the pause menu
+                if (pauseSound!= null)
+                {
+                    pauseSound.Play();
+                }
+            }
+        }
+
+        if (isOpened)
+        {
+            if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+            {
+                wheel.transform.position = wheelPos.transform.position;
+                isOpened = !isOpened; 
+                pauseMenu.SetActive(isOpened); 
+            }
+            if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                isOpened = !isOpened; 
+                pauseMenu.SetActive(isOpened); 
             }
         }
     }
