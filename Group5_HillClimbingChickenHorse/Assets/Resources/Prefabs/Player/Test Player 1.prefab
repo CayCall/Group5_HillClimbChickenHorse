@@ -1296,7 +1296,6 @@ GameObject:
   - component: {fileID: 870511796754961703}
   - component: {fileID: 5064902600576211247}
   - component: {fileID: 2350658683269491271}
-  - component: {fileID: 3912010012301871053}
   m_Layer: 0
   m_Name: Test Player 1
   m_TagString: Untagged
@@ -1399,24 +1398,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UICanvas: {fileID: 8352073185741486932}
   player: {fileID: 5702888961680136191}
---- !u!114 &3912010012301871053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5702888961680136191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abec4b7d30656ed448c5afdda1cffa22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numberOfRounds: 0
-  currentRound: 0
-  nextLevel: 
-  startPosition: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}
-  gameManager: {fileID: 0}
 --- !u!1 &5926205145549194129
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,6 +2453,9 @@ MonoBehaviour:
   - {fileID: 4321863353332479415}
   - {fileID: 7508169259861623332}
   - {fileID: 3786598653074691822}
+  rayDistance: 10
+  targetTag: Target
+  rayOrigin: {fileID: 0}
   menuPanel: {fileID: 0}
 --- !u!1 &8352073185741486932 stripped
 GameObject:

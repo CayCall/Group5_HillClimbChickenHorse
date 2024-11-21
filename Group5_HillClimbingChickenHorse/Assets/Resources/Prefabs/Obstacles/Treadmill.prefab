@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 4452945973767397032}
   - component: {fileID: 5461843441448903274}
   - component: {fileID: 9168735581638497859}
+  - component: {fileID: 2040195417514651239}
   m_Layer: 0
   m_Name: Backwards_Treadmill__3
   m_TagString: Untagged
@@ -425,6 +426,19 @@ PolygonCollider2D:
       - {x: -0.85947126, y: 0.44627678}
       - {x: 0.44719726, y: 0.43866584}
   m_UseDelaunayMesh: 0
+--- !u!114 &2040195417514651239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8147038773727252695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d725beebfaf6c424fbe4e7f081b5ea35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forceDirection: {x: -10, y: 0}
 --- !u!1 &8269026184063959613
 GameObject:
   m_ObjectHideFlags: 0
