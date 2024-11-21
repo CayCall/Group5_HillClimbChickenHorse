@@ -375,6 +375,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3444508225563202388, guid: 6e90e1eb6e458144886dd6117589728f, type: 3}
+      propertyPath: timeForFullRotation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5382745902710345948, guid: 6e90e1eb6e458144886dd6117589728f, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -444,6 +448,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3444508225563202388, guid: 6e90e1eb6e458144886dd6117589728f, type: 3}
+      propertyPath: timeForFullRotation
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5382745902710345948, guid: 6e90e1eb6e458144886dd6117589728f, type: 3}
       propertyPath: m_LocalScale.x
       value: 5
@@ -1541,6 +1549,10 @@ PrefabInstance:
     - target: {fileID: 8966997896698393986, guid: 8baae456d942c484595451a3bfe3c30d, type: 3}
       propertyPath: nextLevel
       value: Level 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8966997896698393986, guid: 8baae456d942c484595451a3bfe3c30d, type: 3}
+      propertyPath: numberOfRounds
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8966997896698393986, guid: 8baae456d942c484595451a3bfe3c30d, type: 3}
       propertyPath: startPosition1
