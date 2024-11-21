@@ -11,7 +11,8 @@ public class ObjectSelectionMenu : MonoBehaviour
     public GameObject[] objectsToPlace;
     public Transform placeholder; 
     public Transform obstacleParent; 
-    public Button[] buttons; 
+    public Button[] buttons;
+    public bool objectInWorld;
     
     [SerializeField] private float rayDistance = 10f; // Distance the ray will travel
     [SerializeField] private string targetTag = "Target"; // Tag to look for
@@ -118,7 +119,7 @@ public class ObjectSelectionMenu : MonoBehaviour
                 PlaceObjectAtCursor();
                 StartCoroutine(ButtonPressAnimation(buttons[selectedIndex]));
             }
-            else
+            else if(!objectInWorld)
             {
                 PlaceObjectInWorld();
             }
@@ -132,7 +133,7 @@ public class ObjectSelectionMenu : MonoBehaviour
         inWorldObject = Instantiate(objectsToPlace[selectedIndex], placeholder.position, Quaternion.identity, obstacleParent);
         inWorldObject.transform.localScale *= 5;//edit here to get correct size
         Destroy(currentObject);
-        
+        objectInWorld = true;
         _gameManager.EndPlacementPhase();
     }
 

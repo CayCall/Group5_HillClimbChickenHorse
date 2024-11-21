@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     public GameObject pnlItems;
     public GameObject[] items;
     private int selectedIndex = 0; 
-    private GameObject instantiatedItem; 
+    private GameObject instantiatedItem;
+    [SerializeField]private ObjectSelectionMenu objectSelectionMenu;
     
     [Header("Placement Phase")]
     public Transform uiParent; 
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
     {
         pnlItems.SetActive(true); 
         Debug.Log("Selection Phase Started");
+        objectSelectionMenu.objectInWorld = false;
         HandlePlayerDeactivateState();
     }
 
