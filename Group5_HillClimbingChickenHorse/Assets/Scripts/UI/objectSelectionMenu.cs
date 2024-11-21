@@ -56,8 +56,18 @@ public class ObjectSelectionMenu : MonoBehaviour
         {
             currentObject.transform.position = placeholder.position;
         }
+        
     }
-
+    public void ResetMenuState()
+    {
+        selectedIndex = 0; 
+        objectPlaced = false; 
+        currentObject = null; 
+        if (buttons.Length > 0)
+        {
+            HighlightButton(buttons[selectedIndex]); 
+        }
+    }
     private void HandleCursorSelection()
     {
         if (Gamepad.current != null)
@@ -122,7 +132,7 @@ public class ObjectSelectionMenu : MonoBehaviour
     {
         if (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame)
         {
-            if (!objectPlaced)
+            if (!objectPlaced )
             {
                 PlaceObjectAtCursor();
                 StartCoroutine(ButtonPressAnimation(buttons[selectedIndex]));
@@ -143,7 +153,7 @@ public class ObjectSelectionMenu : MonoBehaviour
         await WaitOneSecond(); 
         var worldPos = GetCursorWorldPosition();
         inWorldObject = Instantiate(objectsToPlace[selectedIndex], placeholder.position, Quaternion.identity, obstacleParent);
-        inWorldObject.transform.localScale *= 5;//edit here to get correct size
+        inWorldObject.transform.localScale *= 5; 
         Destroy(currentObject);
         _gameManager.EndPlacementPhase();
     }

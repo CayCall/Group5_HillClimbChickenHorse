@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 {
     [Header("Selection Phase")]
     public GameObject pnlItems;
+
+    public ObjectSelectionMenu Uicanvas;
     public GameObject[] items;
     private int selectedIndex = 0; 
     private GameObject instantiatedItem;
@@ -60,9 +62,15 @@ public class GameManager : MonoBehaviour
 
     public void StartSelectionPhase()
     {
-        pnlItems.SetActive(true); 
+        pnlItems.SetActive(true);
+        Cursor.SetActive(true);
+        var selectionMenu = Uicanvas.GetComponent<ObjectSelectionMenu>();
+        if (selectionMenu != null)
+        {
+            selectionMenu.ResetMenuState();
+        }
         Debug.Log("Selection Phase Started");
-        HandlePlayerDeactivateState();
+        
     }
 
     public void EndSelectionPhase()
@@ -112,16 +120,22 @@ public class GameManager : MonoBehaviour
 
     private void HandlePlayerActiveState()
     {
-        for (int i = 0; i < _playerInputsArray.Length; i++)
+        foreach (var playerInput in _playerInputsArray)
         {
-            _playerInputsArray[i].enabled = true;
+            if (playerInput != null)
+            {
+                playerInput.enabled = true;
+            }
         }
-        for (int i = 0; i < _playerInputArray.Length; i++)
-        {
-            _playerInputArray[i].enabled = true;
-        }        
-    }
 
+        foreach (var customInput in _playerInputArray)
+        {
+            if (customInput != null)
+            {
+                customInput.enabled = true;
+            }
+        }
+    }
 
     private IEnumerator AdjustCameraZoom(float targetZoom, Vector3 targetPosition)
     {
