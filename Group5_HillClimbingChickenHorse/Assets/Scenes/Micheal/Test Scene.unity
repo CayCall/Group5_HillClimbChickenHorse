@@ -775,6 +775,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4262699075266349999}
     - target: {fileID: 8047258580197305359, guid: 419acfc92bc197541b1bf4cb41343425, type: 3}
+      propertyPath: Uicanvas
+      value: 
+      objectReference: {fileID: 9061329390405894588}
+    - target: {fileID: 8047258580197305359, guid: 419acfc92bc197541b1bf4cb41343425, type: 3}
       propertyPath: pnlItems
       value: 
       objectReference: {fileID: 6506837646087343856}
@@ -1229,11 +1233,11 @@ PrefabInstance:
       objectReference: {fileID: 6506837646087343860}
     - target: {fileID: 9208182936237670070, guid: 3f8d7d5cea52bf7439112efbc6469236, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -132.6
+      value: 118
       objectReference: {fileID: 0}
     - target: {fileID: 9208182936237670070, guid: 3f8d7d5cea52bf7439112efbc6469236, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -64.9
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 9208182936237670070, guid: 3f8d7d5cea52bf7439112efbc6469236, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2506,7 +2510,7 @@ Transform:
   m_GameObject: {fileID: 2148907305045050769}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.75, z: -10}
+  m_LocalPosition: {x: 250.6, y: 48.65, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2669,7 +2673,7 @@ Transform:
   m_GameObject: {fileID: 6778142030222669168}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.75, z: -10}
+  m_LocalPosition: {x: 250.6, y: 48.65, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3207,6 +3211,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9061329390405894588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9050446293130495382, guid: 3f8d7d5cea52bf7439112efbc6469236, type: 3}
+  m_PrefabInstance: {fileID: 1243419144}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8227371003283153169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30bea16a69e95f147b744359952a2eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9080892991652058189
 MonoBehaviour:
   m_ObjectHideFlags: 3
