@@ -18,6 +18,7 @@ public class PlayerInputs : MonoBehaviour
     //pause menu
     public GameObject pauseMenu;
     private bool isOpened = false;
+    [SerializeField] private AudioSource pauseSound;
     
     private void Update()
     {
@@ -106,6 +107,12 @@ public class PlayerInputs : MonoBehaviour
                 isOpened = !isOpened; 
                 pauseMenu.SetActive(isOpened); 
                 Time.timeScale = isOpened ? 0f : 1f; 
+                pauseSound.Play();
+                // Play sound for toggling the pause menu
+                if (pauseSound!= null)
+                {
+                    pauseSound.Play();
+                }
             }
         }
     }
