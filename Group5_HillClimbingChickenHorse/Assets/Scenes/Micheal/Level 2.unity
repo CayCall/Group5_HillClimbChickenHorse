@@ -1471,6 +1471,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -540
       objectReference: {fileID: 0}
+    - target: {fileID: 1042571676695901734, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
+      propertyPath: wheelPos
+      value: 
+      objectReference: {fileID: 5473141627056343775}
+    - target: {fileID: 1658396656654026406, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
+      propertyPath: wheelPos
+      value: 
+      objectReference: {fileID: 6115406508185836262}
     - target: {fileID: 1702406555177683517, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -1633,6 +1641,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77e026a7621b2e14cb6893d24f98f092, type: 3}
+--- !u!1 &5473141627056343775 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6898787552182938380, guid: 77e026a7621b2e14cb6893d24f98f092, type: 3}
+  m_PrefabInstance: {fileID: 5473141627056343774}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6115406508185836261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1690,6 +1703,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f48e2bd224689124ebdd4bd78329f4d7, type: 3}
+--- !u!1 &6115406508185836262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9005283140510405596, guid: f48e2bd224689124ebdd4bd78329f4d7, type: 3}
+  m_PrefabInstance: {fileID: 6115406508185836261}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6506837646087343856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2389033039475380574, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
