@@ -12,7 +12,7 @@ public class FollowPositionTracker : MonoBehaviour
         if (!rb) rb = GetComponent<Rigidbody2D>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         rb.MovePosition(positionTracker.position);
     }
