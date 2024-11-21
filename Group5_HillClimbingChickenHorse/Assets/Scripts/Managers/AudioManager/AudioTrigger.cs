@@ -25,9 +25,20 @@ public class AudioTrigger : MonoBehaviour
             hasBeenTriggered = false;
         }
     }
+    
+    async private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!hasBeenTriggered && other.CompareTag("Wheel"))
+        {
+            hasBeenTriggered = true;
+            PlayAudio();
+            await WaitOneSecond(); 
+            hasBeenTriggered = false;
+        }
+    }
     private async Task WaitOneSecond()
     {
-        await Task.Delay(1000); //1000 milliseconds 
+        await Task.Delay(1000); 
     }
 
      private void OnCollisionExit2D(Collision2D col)

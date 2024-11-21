@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+
 using UnityEngine.XR;
 
 public class ObjectSelectionMenu : MonoBehaviour
@@ -26,7 +28,10 @@ public class ObjectSelectionMenu : MonoBehaviour
    
 
     public GameObject menuPanel;
-    public AudioSource menuSound;
+    public AudioSource menuPanelSound;
+    public AudioSource menuPanelConfirm;
+    public AudioSource menuPanelPlace;
+    
     private void Start()
     {
         if (buttons.Length == 0)
@@ -60,13 +65,13 @@ public class ObjectSelectionMenu : MonoBehaviour
             if (Gamepad.current.dpad.down.wasPressedThisFrame)
             {
                 selectedIndex = (selectedIndex - 1 + buttons.Length) % buttons.Length;
-                menuSound.Play();
+                menuPanelSound.Play();
                 HighlightButton(buttons[selectedIndex]);
             }
             if (Gamepad.current.dpad.up.wasPressedThisFrame)
             {
                 selectedIndex = (selectedIndex + 1) % buttons.Length;
-                menuSound.Play();
+                menuPanelSound.Play();
                 HighlightButton(buttons[selectedIndex]);
             }
         }
@@ -124,23 +129,29 @@ public class ObjectSelectionMenu : MonoBehaviour
             }
             else
             {
+        
                 PlaceObjectInWorld();
+            
             }
         }
     }
 
-    private void PlaceObjectInWorld()
+    async private void PlaceObjectInWorld()
     {
+     
+        menuPanelPlace.Play();
+        await WaitOneSecond(); 
         var worldPos = GetCursorWorldPosition();
         inWorldObject = Instantiate(objectsToPlace[selectedIndex], placeholder.position, Quaternion.identity, obstacleParent);
         inWorldObject.transform.localScale *= 5;//edit here to get correct size
         Destroy(currentObject);
-        
         _gameManager.EndPlacementPhase();
     }
 
-    private void PlaceObjectAtCursor()
+    async private void PlaceObjectAtCursor()
     {
+        menuPanelConfirm.Play();
+        await WaitOneSecond(); 
         currentObject = Instantiate(objectsToPlace[selectedIndex], placeholder.position, Quaternion.identity, placeholder);
         currentObject.transform.localScale *= 100;
         objectPlaced = true;
@@ -197,5 +208,9 @@ public class ObjectSelectionMenu : MonoBehaviour
 
         //scale up
         button.transform.localScale = originalScale;
+    }
+    private async Task WaitOneSecond()
+    {
+        await Task.Delay(1000); 
     }
 }

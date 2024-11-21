@@ -15,12 +15,17 @@ public class PlayerInputs : MonoBehaviour
     public float positive;
     public float negative;
 
+    //pause menu
+    public GameObject pauseMenu;
+    private bool isOpened = false;
+    
     private void Update()
     {
         // Continuously call input methods
         Gas();
         Cursor();
         Select();
+        PauseGame();
     }
 
     // Method to detect gas (acceleration) inputs from both Gamepad and Keyboard
@@ -88,5 +93,20 @@ public class PlayerInputs : MonoBehaviour
     {
         // Check if Button South is pressed again for placement
         return Gamepad.current.buttonSouth.wasPressedThisFrame;
+    }
+
+
+    public void PauseGame()
+    {
+        if (Gamepad.current != null && Gamepad.current.enabled)
+        {
+            // Detect button press (not hold)
+            if (Gamepad.current.startButton.wasPressedThisFrame && pauseMenu != null)
+            {
+                isOpened = !isOpened; 
+                pauseMenu.SetActive(isOpened); 
+                Time.timeScale = isOpened ? 0f : 1f; 
+            }
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class SceneLoaders : MonoBehaviour
     }
     public void LoadStartScene()
     {
-        SceneManager.LoadScene("");    
+        SceneManager.LoadScene("StartScene");    
     }
     public void LoadMainScene()
     {
@@ -29,7 +30,12 @@ public class SceneLoaders : MonoBehaviour
     {
         SceneManager.LoadScene("");
     }
-    
+
+    public void OnApplicationQuit()
+    {
+        Application.Quit();
+    }
+
     //Pause menus 
     public void PauseGame()
     {
