@@ -46,4 +46,5 @@ public class SceneLoaders : MonoBehaviour
     {
         Time.timeScale = 1f;    
     }
+    
 }
