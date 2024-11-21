@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Micheal/Test Scene.unity
-    guid: 34e0dc5f82e3fbb4fbde957256612b6f
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: ecf05bafddc3d66429b894d58d19f04b
   - enabled: 1
     path: Assets/Scenes/Micheal/Level 1.unity
     guid: 1b17376c4d08f2a48a30dd3f1a99cdb6
@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Micheal/Level 3.unity
     guid: 81474a7290593b84983e50f1510e7cd1
+  - enabled: 1
+    path: Assets/Scenes/Micheal/Level 4.unity
+    guid: be8c68b2c2c5fad41a026f085a0e4a52
   m_configObjects: {}
