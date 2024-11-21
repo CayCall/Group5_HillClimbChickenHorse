@@ -25,6 +25,7 @@ public class ObjectSelectionMenu : MonoBehaviour
     private Coroutine currentHighlightCoroutine;
     private int selectedIndex = 0; 
     private bool objectPlaced = false;
+    public bool objectInWorld = false;
    
 
     public GameObject menuPanel;
@@ -137,11 +138,12 @@ public class ObjectSelectionMenu : MonoBehaviour
                 PlaceObjectAtCursor();
                 StartCoroutine(ButtonPressAnimation(buttons[selectedIndex]));
             }
-            else
+            else if (!objectInWorld)
             {
         
                 PlaceObjectInWorld();
-            
+                objectInWorld = true;
+
             }
         }
     }

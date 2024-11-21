@@ -9,13 +9,14 @@ public class GameManager : MonoBehaviour
 {
     [Header("Selection Phase")]
     public GameObject pnlItems;
-
+    public GameObject uiiiii;
+    public ObjectSelectionMenu ObjectSelectionMenu;
     public ObjectSelectionMenu Uicanvas;
     public GameObject[] items;
     private int selectedIndex = 0; 
     private GameObject instantiatedItem;
 
-    
+
     [Header("Placement Phase")]
     public Transform uiParent; 
     public CinemachineVirtualCamera Camera;
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
             selectionMenu.ResetMenuState();
         }
         Debug.Log("Selection Phase Started");
-        
+        ObjectSelectionMenu.objectInWorld = false;
     }
 
     public void EndSelectionPhase()
