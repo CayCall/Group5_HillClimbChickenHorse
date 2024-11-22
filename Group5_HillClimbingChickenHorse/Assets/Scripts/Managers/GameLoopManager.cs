@@ -58,6 +58,11 @@ public class GameLoopManager : MonoBehaviour
         {
             CheckNextStep();
         }
+        else if (col.CompareTag("Obstacle"))
+        {
+            Debug.Log("Hit");
+            ResetPlayer();
+        }
         else
         {
             Debug.LogError("Get chowed");

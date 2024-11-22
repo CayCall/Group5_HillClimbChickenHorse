@@ -123,7 +123,8 @@ public class PlayerInputs : MonoBehaviour
         {
             if (Gamepad.current.buttonNorth.wasPressedThisFrame)
             {
-                wheel.transform.position = wheelPos.transform.position;
+                Debug.Log("ButtonNorth was pressed");
+                wheel.transform.localPosition = wheel.transform.parent.InverseTransformPoint(wheelPos.transform.position);              
                 isOpened = false; 
                 pauseMenu.SetActive(false);
                 Time.timeScale = 1f;

@@ -138,7 +138,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3444508225563202388, guid: 6e90e1eb6e458144886dd6117589728f, type: 3}
       propertyPath: timeForFullRotation
-      value: 1.5
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5382745902710345948, guid: 6e90e1eb6e458144886dd6117589728f, type: 3}
       propertyPath: m_LocalScale.x
@@ -212,7 +212,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3444508225563202388, guid: 6e90e1eb6e458144886dd6117589728f, type: 3}
       propertyPath: timeForFullRotation
-      value: 1.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5382745902710345948, guid: 6e90e1eb6e458144886dd6117589728f, type: 3}
       propertyPath: m_LocalScale.x
@@ -808,7 +808,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -148.54149, y: 73.508026}
@@ -1227,6 +1227,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1826501165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1688768427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6621257264461189074, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
+  m_PrefabInstance: {fileID: 5210450552751449546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1688768429 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1250917375211487320, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
+  m_PrefabInstance: {fileID: 5210450552751449546}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1826501165 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2079103838113864047, guid: 7165d76a5c46d084e94130fb77ddc820, type: 3}
@@ -1472,6 +1482,14 @@ PrefabInstance:
       propertyPath: wheelPos
       value: 
       objectReference: {fileID: 5473141627056343775}
+    - target: {fileID: 1042571676695901734, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 1688768427}
+    - target: {fileID: 1042571676695901734, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
+      propertyPath: pauseSound
+      value: 
+      objectReference: {fileID: 1688768429}
     - target: {fileID: 1658396656654026406, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
       propertyPath: wheelPos
       value: 
@@ -1580,6 +1598,10 @@ PrefabInstance:
       propertyPath: startPosition1
       value: 
       objectReference: {fileID: 41905289}
+    - target: {fileID: 4863698377470493998, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
+      propertyPath: startPosition2
+      value: 
+      objectReference: {fileID: 5473141627056343776}
     - target: {fileID: 5793182968762930987, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
       propertyPath: _gameManager
       value: 
@@ -1607,7 +1629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6616115656516388284, guid: 77e026a7621b2e14cb6893d24f98f092, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -49.85
+      value: -43.58
       objectReference: {fileID: 0}
     - target: {fileID: 6616115656516388284, guid: 77e026a7621b2e14cb6893d24f98f092, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1655,6 +1677,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6898787552182938380, guid: 77e026a7621b2e14cb6893d24f98f092, type: 3}
   m_PrefabInstance: {fileID: 5473141627056343774}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &5473141627056343776 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6616115656516388284, guid: 77e026a7621b2e14cb6893d24f98f092, type: 3}
+  m_PrefabInstance: {fileID: 5473141627056343774}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6115406508185836261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1669,7 +1696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4997199746716312717, guid: f48e2bd224689124ebdd4bd78329f4d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -49.85
+      value: -43.58
       objectReference: {fileID: 0}
     - target: {fileID: 4997199746716312717, guid: f48e2bd224689124ebdd4bd78329f4d7, type: 3}
       propertyPath: m_LocalPosition.z

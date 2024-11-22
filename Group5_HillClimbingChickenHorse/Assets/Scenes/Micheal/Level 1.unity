@@ -1083,6 +1083,14 @@ PrefabInstance:
       propertyPath: wheelPos
       value: 
       objectReference: {fileID: 1060566201}
+    - target: {fileID: 1042571676695901734, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 5210450552751449547}
+    - target: {fileID: 1042571676695901734, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
+      propertyPath: pauseSound
+      value: 
+      objectReference: {fileID: 5210450552751449548}
     - target: {fileID: 1658396656654026406, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
       propertyPath: wheelPos
       value: 
@@ -1164,6 +1172,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
+--- !u!1 &5210450552751449547 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6621257264461189074, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
+  m_PrefabInstance: {fileID: 5210450552751449546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &5210450552751449548 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1250917375211487320, guid: 288d673500c27c84ead5ddac4cdc15d1, type: 3}
+  m_PrefabInstance: {fileID: 5210450552751449546}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5473141627056343774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1174,11 +1192,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6616115656516388284, guid: 77e026a7621b2e14cb6893d24f98f092, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -237.3
+      value: -230.46
       objectReference: {fileID: 0}
     - target: {fileID: 6616115656516388284, guid: 77e026a7621b2e14cb6893d24f98f092, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -106.8
+      value: -99.08
       objectReference: {fileID: 0}
     - target: {fileID: 6616115656516388284, guid: 77e026a7621b2e14cb6893d24f98f092, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1231,11 +1249,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4997199746716312717, guid: f48e2bd224689124ebdd4bd78329f4d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -239.3
+      value: -232.46
       objectReference: {fileID: 0}
     - target: {fileID: 4997199746716312717, guid: f48e2bd224689124ebdd4bd78329f4d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -106.8
+      value: -99.08
       objectReference: {fileID: 0}
     - target: {fileID: 4997199746716312717, guid: f48e2bd224689124ebdd4bd78329f4d7, type: 3}
       propertyPath: m_LocalPosition.z
